@@ -7,6 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EShopApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EShopApplication.class, args);
-		new TimeReader();
 	}
 }
