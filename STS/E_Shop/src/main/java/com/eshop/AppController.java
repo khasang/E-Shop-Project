@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AppController {
 	@RequestMapping("/result")
 	public @ResponseBody String colorOfLight() {
-		return new LightTimer().resultColorOut();
+		LightTimer lightTimer = new LightTimer();
+		return lightTimer.checkCurrentColorByMinute(MinuteReader.getUserInputNumber());
 	}
 }

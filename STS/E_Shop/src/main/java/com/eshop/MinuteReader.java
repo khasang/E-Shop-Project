@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class MinuteReader {
 	private Scanner inputFromUser;
-	private int userInputNumber;
+	private static int userInputNumber;
 
 	public MinuteReader() {
 		minuteReaderCyclie();
@@ -23,22 +23,19 @@ public class MinuteReader {
 
 	public void readNumberFromConsole(InputStream is) {
 		try {
-			System.out.println("Enter the number of minute");
+			System.out.println(Text.ENTER_NUMBER);
 			inputFromUser = new Scanner(is);
 			userInputNumber = Integer.parseInt(inputFromUser.nextLine());
 		} catch (Exception e) {
-			System.out.println("Wrong format");
+			System.err.println(Text.WRONG_FORMAT);
 		}
 	}
 
 	public boolean isNumberRangeTrue(int numberToCheck) {
-		if (numberToCheck > 0 && numberToCheck < 59) {
-			return true;
-		}
-		return false;
+		return (numberToCheck > 0 && numberToCheck < 59);
 	}
 
-	public int getUserInputNumber(){
+	public static int getUserInputNumber(){
 		return userInputNumber;
 	}
 }
