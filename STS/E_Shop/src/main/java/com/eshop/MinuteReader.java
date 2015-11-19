@@ -15,7 +15,7 @@ public class MinuteReader {
 		while (true) {
 			readNumberFromConsole(System.in);
 			if (isNumberRangeTrue(userInputNumber)){
-				System.out.println("Check localhost:8080/result");
+				System.out.println(Text.RESULT_URL);
 				break;
 			}
 		}
