@@ -1,5 +1,6 @@
 package com.eshop;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class MinuteReader {
@@ -12,15 +13,18 @@ public class MinuteReader {
 	
 	public void minuteReaderCyclie(){
 		while (true) {
+			readNumberFromConsole(System.in);
 			if (isNumberRangeTrue(userInputNumber)){
+				System.out.println("Check localhost:8080/result");
 				break;
 			}
 		}
 	}
 
-	public void readNumberFromConsole() {
+	public void readNumberFromConsole(InputStream is) {
 		try {
-			inputFromUser = new Scanner(System.in);
+			System.out.println("Enter the number of minute");
+			inputFromUser = new Scanner(is);
 			userInputNumber = Integer.parseInt(inputFromUser.nextLine());
 		} catch (Exception e) {
 			System.out.println("Wrong format");
