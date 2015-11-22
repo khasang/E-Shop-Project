@@ -5,4 +5,5 @@ public class Text {
 			ENTER_NUMBER = "Enter the number of minute",
 			WRONG_FORMAT = "Wrong format",
 			RESULT_URL = "Check localhost:8080/result";
+			
 }
