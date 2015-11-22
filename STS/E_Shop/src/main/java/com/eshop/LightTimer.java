@@ -19,10 +19,10 @@ public class LightTimer {
 	public String checkCurrentColorByMinute(int currentMinute) {
 		initLightTimer();
 		if (redMinutesTimer.contains(currentMinute)) {
-			return "Red";
+			return Strings.red;
 		} else if (yellowMinutesTimer.contains(currentMinute)) {
-			return "Yellow";
+			return Strings.yellow;
 		} else
-			return "Green";
+			return Strings.green;
 	}
 }
