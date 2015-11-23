@@ -12,7 +12,6 @@ public class AppController {
 
 	@RequestMapping("/result")
 	public @ResponseBody String colorOfLight() {
-		
 		color = lightTimer.checkCurrentColorByMinute(timeReader.getMinute());
 		if (!color.equals(null)) {
 			return color;
