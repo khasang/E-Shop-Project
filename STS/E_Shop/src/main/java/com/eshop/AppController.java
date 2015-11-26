@@ -9,6 +9,6 @@ public class AppController {
 	@RequestMapping("/result")
 	public @ResponseBody String colorOfLight() {
 		LightTimer lightTimer = new LightTimer();
-		return lightTimer.checkCurrentColorByMinute(TimeReader.getMinute());
+		return lightTimer.checkCurrentColorByMinute(MinuteReader.getUserInputNumber());
 	}
 }
