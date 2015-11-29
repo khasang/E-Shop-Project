@@ -18,7 +18,6 @@ public class AppController {
 		} else {
 			return Strings.colorWarning;
 		}
-
 	}
 
 	public void init(LightTimer lightTimer, TimeReader timeReader) {

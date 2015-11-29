@@ -10,6 +10,5 @@ public class EShopApplication {
 		ApplicationContext context = SpringApplication.run(EShopApplication.class, args);
 		AppController controller = context.getBean(AppController.class);
 		controller.init(new LightTimer(),new TimeReader());
-
 	}
 }

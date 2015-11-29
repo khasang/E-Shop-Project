@@ -27,5 +27,4 @@ public class TimeReader {
 			System.err.println("Wrong format!");
 		}
 	}
-
 }
