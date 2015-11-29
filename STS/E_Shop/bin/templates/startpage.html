@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Product add</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div
+		style="width: 200px; margin: 0 auto; border: 1px solid gray; padding-bottom: 15px;"
+		align="center">
+		<form action="/insertProduct" method="post">
+			<p>Product name</p>
+			<input type="text" id="name" name="name" />
+			<p>Product amount</p>
+			<input type="text" id="amount" name="amount" />
+			<p></p>
+			<input type="submit" value="Add"></input>
+		</form>
+		<form action="/createTable" method="POST">
+			<input type="submit" value="Create Table"></input>
+		</form>
+	</div>
+</body>
+</html>
