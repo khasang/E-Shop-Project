@@ -20,12 +20,55 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/sql")
-	public ModelAndView sqlHello() {
+	@RequestMapping("webshop/BackupDB")
+	public ModelAndView backupDB() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		Sql sql = new Sql();
-		sql.sqlInsert();
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
+	
+	@RequestMapping("webshop/CreateDataTable")
+	public ModelAndView createDataTable() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	@RequestMapping("webshop/DeleteDataTable")
+	public ModelAndView deleteDataTable() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	@RequestMapping("webshop/DescribeTableInfoColumns")
+	public ModelAndView describeTableInfoColumns() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	@RequestMapping("webshop/insertDataTable")
+	public ModelAndView insertDataTable() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	@RequestMapping("webshop/SelectDataTable")
+	public ModelAndView selectDataTable() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	@RequestMapping("webshop/ShrinkDataDB")
+	public ModelAndView shrinkDataDB() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		//new
+		modelandview.addObject("msg", Sql.sqlCheck);
+		return modelandview;
+	}
+	
+	
 }
