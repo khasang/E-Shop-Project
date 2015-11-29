@@ -69,6 +69,4 @@ public class AppController {
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
-	
-	
 }
