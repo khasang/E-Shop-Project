@@ -65,9 +65,8 @@ public class AppController {
 	@RequestMapping("webshop/ShrinkDataDB")
 	public ModelAndView shrinkDataDB() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
+		//new
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
-	
-	
 }
