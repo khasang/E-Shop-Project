@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eshop.model.BackupDB;
+
 @Controller
 public class AppController {
 	@RequestMapping("/webshop")
@@ -22,8 +24,8 @@ public class AppController {
 
 	@RequestMapping("webshop/BackupDB")
 	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		ModelAndView modelandview = new ModelAndView("E-Shop");		
+		modelandview.addObject("msg", new BackupDB().backupResultOutput());
 		return modelandview;
 	}
 	
