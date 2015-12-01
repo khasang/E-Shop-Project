@@ -1,5 +1,7 @@
 package com.eshop.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,9 +58,10 @@ public class AppController {
 	}
 	
 	@RequestMapping("webshop/SelectDataTable")
-	public ModelAndView selectDataTable() {
+	public ModelAndView selectDataTable() throws SQLException {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		Sql sql = new Sql();
+		modelandview.addObject("msg", sql.sqlSelect());
 		return modelandview;
 	}
 	
