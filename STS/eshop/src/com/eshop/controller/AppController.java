@@ -3,6 +3,7 @@ package com.eshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.eshop.model.*;
 
 @Controller
 public class AppController {
@@ -57,7 +58,8 @@ public class AppController {
 	
 	@RequestMapping("webshop/SelectDataTable")
 	public ModelAndView selectDataTable() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
+		ModelAndView modelandview = new ModelAndView("test");
+		SelectDataTable sdt = new SelectDataTable();
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
