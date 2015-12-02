@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="EShopProj">
+    <wb-module deploy-name="eshop">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="EShopProj"/>
-        <property name="java-output-path" value="/EShopProj/build/classes"/>
+        <property name="java-output-path" value="/eshop/build/classes"/>
+        <property name="context-root" value="eshop"/>
     </wb-module>
 </project-modules>
