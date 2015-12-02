@@ -13,7 +13,7 @@ public class BackupDB {
 		try {
 			Runtime runtime = Runtime.getRuntime();
 			backupProcess = runtime.exec(
-					"mysqldump eshop -u root -proot -r \"C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\backup.sql\"");
+					"mysqldump e-shop -u root -proot -r \"C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\backup.sql\"");
 			int processComplete = backupProcess.waitFor();
 			if (processComplete == 0) {
 				backupResult = "Backup created successfully!";
