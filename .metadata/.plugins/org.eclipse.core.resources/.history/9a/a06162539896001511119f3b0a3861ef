@@ -1,0 +1,33 @@
+package com.eshop.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+public class Sql {
+	public static String sqlCheck;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+	
+	public void sqlInsert(String name, int quantity) {
+		System.out.println("try to update db...");
+		try {
+			System.out.println("Creating tables");
+			jdbcTemplate.execute("DROP TABLE IF EXISTS goods");
+			jdbcTemplate.execute("create table goods(ID INT NOT NULL,"
+			+ "name MEDIUMTEXT NOT NULL,"
+			+ "quantity INT NOT NULL");
+			jdbcTemplate.update("INSERT INTO goods(name, quantity) VALUES(?,?)",name,quantity);			
+			sqlCheck = "db updated";
+		} catch (Exception e) {
+			sqlCheck = "Have error: " + e;
+			System.err.println(sqlCheck);
+		}
+	}
+
+	public String sqlInsertCheck() {
+		Sql sql = new Sql();
+		sql.sqlInsert();
+		return sqlCheck;
+	}
+}
