@@ -3,6 +3,13 @@ package com.eshop.model;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+=======
+>>>>>>> acherbaev
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -12,6 +19,10 @@ public class SelectDataTable {
 	private static final String PASSWORD = "1111";
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/e-shop";
 	private static final String TABLE_NAME = "trafficlight";
+<<<<<<< HEAD
+	public List<DataTable> list = new ArrayList<>();
+=======
+>>>>>>> acherbaev
 
 	public SelectDataTable() {
 		try {
@@ -34,6 +45,10 @@ public class SelectDataTable {
 
 	private void viewTable(Connection con) {
 		Statement stmt = null;
+<<<<<<< HEAD
+		DataTable dt = new DataTable();
+=======
+>>>>>>> acherbaev
 		String query = "select ID, minute, color " + "from " + TABLE_NAME;
 		try {
 			stmt = (Statement) con.createStatement();
@@ -43,6 +58,13 @@ public class SelectDataTable {
 				int minute = rs.getInt("minute");
 				String color = rs.getString("color");
 				System.out.println("ID = " + id + " minute = " + minute + " color = " + color);
+<<<<<<< HEAD
+				dt.setID(id);
+				dt.setMinute(minute);
+				dt.setColor(color);
+				list.add(dt);
+=======
+>>>>>>> acherbaev
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
