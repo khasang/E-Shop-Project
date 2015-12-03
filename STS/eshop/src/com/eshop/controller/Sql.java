@@ -11,7 +11,7 @@ public class Sql {
 		dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
 		dataSource.setUsername("root");
 		dataSource.setUrl("jdbc:mysql://localhost/e-shop");
-		dataSource.setPassword("root");
+		dataSource.setPassword("1111");
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		System.out.println("try to update db...");
 		try {

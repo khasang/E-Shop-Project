@@ -3,9 +3,13 @@ package com.eshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+<<<<<<< HEAD
 
 import com.eshop.model.DataTable;
 import com.eshop.model.SelectDataTable;
+=======
+import com.eshop.model.*;
+>>>>>>> acherbaev
 
 @Controller
 public class AppController {
@@ -60,6 +64,7 @@ public class AppController {
 	
 	@RequestMapping("webshop/SelectDataTable")
 	public ModelAndView selectDataTable() {
+<<<<<<< HEAD
 		ModelAndView modelandview = new ModelAndView("SelectDataTable");
 		SelectDataTable selectDataTable = new SelectDataTable();
 		//modelandview.addObject("msg", Sql.sqlCheck);
@@ -69,6 +74,11 @@ public class AppController {
 		for(DataTable dt: selectDataTable.list){
 			System.out.println("ID = " + dt.getID() + " | " + dt.getMinute() + " | " + dt.getColor());
 		}
+=======
+		ModelAndView modelandview = new ModelAndView("test");
+		SelectDataTable sdt = new SelectDataTable();
+		modelandview.addObject("msg", Sql.sqlCheck);
+>>>>>>> acherbaev
 		return modelandview;
 	}
 	
