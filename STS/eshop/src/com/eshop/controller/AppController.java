@@ -1,12 +1,8 @@
 package com.eshop.controller;
 
-import java.sql.SQLException;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.eshop.model.BackupDB;
 
 @Controller
 public class AppController {
@@ -26,8 +22,8 @@ public class AppController {
 
 	@RequestMapping("webshop/BackupDB")
 	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");		
-		modelandview.addObject("msg", new BackupDB().backupResultOutput());
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
 	
@@ -60,10 +56,9 @@ public class AppController {
 	}
 	
 	@RequestMapping("webshop/SelectDataTable")
-	public ModelAndView selectDataTable() throws SQLException {
+	public ModelAndView selectDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		Sql sql = new Sql();
-		modelandview.addObject("msg", sql.sqlSelect());
+		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
 	

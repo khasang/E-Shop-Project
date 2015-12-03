@@ -1,11 +1,5 @@
 package com.eshop.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
@@ -32,32 +26,6 @@ public class Sql {
 		} catch (Exception e) {
 			sqlCheck = "Have error: " + e;
 			System.err.println(sqlCheck);
-		}
-	}
-	
-	String sqlSelect() throws SQLException {
-		Statement stmt = null;
-		ResultSet rs = null;
-		Connection conn = null;
-		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-		dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
-		dataSource.setUsername("root");
-		dataSource.setUrl("jdbc:mysql://localhost/e-shop");
-		dataSource.setPassword("root");
-		try{
-		conn =  DriverManager.getConnection("jdbc:mysql://localhost/e-shop?" +
-			                                   "user=root&password=root");
-		    stmt = conn.createStatement();
-		    rs = stmt.executeQuery("SELECT name FROM `e-shop`.customers where id = '1'");
-		    String foundType = rs.getString("name");
-		    return foundType;
-		}
-		catch(Exception e){
-			System.err.println("Error" + e);
-			return "Error" + e;
-		}
-		finally{
-			if (stmt != null) { stmt.close(); }
 		}
 	}
 
