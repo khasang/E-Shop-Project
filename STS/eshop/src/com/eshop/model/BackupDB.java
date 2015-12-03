@@ -2,12 +2,12 @@ package com.eshop.model;
 
 public class BackupDB {
 	static String backupResult;
-	
-    public String backupResultOutput(){
-      backupDatabase();
-      return backupResult;
-    }
-	
+
+	public String backupResultOutput() {
+		backupDatabase();
+		return backupResult;
+	}
+
 	public void backupDatabase() {
 		Process backupProcess = null;
 		try {
