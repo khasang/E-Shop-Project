@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eshop.model.DataTable;
+import com.eshop.model.SelectDataTable;
+
 @Controller
 public class AppController {
 	@RequestMapping("/webshop")
@@ -57,8 +60,15 @@ public class AppController {
 	
 	@RequestMapping("webshop/SelectDataTable")
 	public ModelAndView selectDataTable() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		ModelAndView modelandview = new ModelAndView("SelectDataTable");
+		SelectDataTable selectDataTable = new SelectDataTable();
+		//modelandview.addObject("msg", Sql.sqlCheck);
+		String[] array = {"dd", "ff"};
+		modelandview.addObject("list", selectDataTable.list);
+		modelandview.addObject("array", array);
+		for(DataTable dt: selectDataTable.list){
+			System.out.println("ID = " + dt.getID() + " | " + dt.getMinute() + " | " + dt.getColor());
+		}
 		return modelandview;
 	}
 	
