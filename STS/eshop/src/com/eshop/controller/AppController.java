@@ -26,51 +26,51 @@ public class AppController {
 
 	@RequestMapping("webshop/BackupDB")
 	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");		
+		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("msg", new BackupDB().backupResultOutput());
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/CreateDataTable")
 	public ModelAndView createDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/DeleteDataTable")
 	public ModelAndView deleteDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/DescribeTableInfoColumns")
 	public ModelAndView describeTableInfoColumns() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/insertDataTable")
 	public ModelAndView insertDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		Sql sql = new Sql();
+		modelandview.addObject("msg", sql.sqlInsertCheck());
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/SelectDataTable")
 	public ModelAndView selectDataTable() throws SQLException {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		Sql sql = new Sql();
-		modelandview.addObject("msg", sql.sqlSelect());
+		modelandview.addObject("msg", sql.selectSupplierName());
 		return modelandview;
 	}
-	
+
 	@RequestMapping("webshop/ShrinkDataDB")
 	public ModelAndView shrinkDataDB() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		//new
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
