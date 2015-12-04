@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eshop.model.DeleteDataTable;
+
 @Controller
 public class AppController {
 	@RequestMapping("/webshop")
@@ -34,10 +36,12 @@ public class AppController {
 		return modelandview;
 	}
 	
-	@RequestMapping("webshop/DeleteDataTable")
+	@RequestMapping("webshop/deletedatatable")
 	public ModelAndView deleteDataTable() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		ModelAndView modelandview = new ModelAndView("eshop");
+		DeleteDataTable deleteDataTable = DeleteDataTable.getInstance();
+		deleteDataTable.deleteTable("trafficlight");
+		modelandview.addObject("msg", deleteDataTable.getResultMessage());
 		return modelandview;
 	}
 	
