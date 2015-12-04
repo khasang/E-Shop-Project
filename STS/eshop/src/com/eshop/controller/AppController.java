@@ -38,7 +38,7 @@ public class AppController {
 	
 	@RequestMapping("webshop/deletedatatable")
 	public ModelAndView deleteDataTable() {
-		ModelAndView modelandview = new ModelAndView("eshop");
+		ModelAndView modelandview = new ModelAndView("E-Shop");
 		DeleteDataTable deleteDataTable = DeleteDataTable.getInstance();
 		deleteDataTable.deleteTable("trafficlight");
 		modelandview.addObject("msg", deleteDataTable.getResultMessage());
