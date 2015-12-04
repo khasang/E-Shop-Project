@@ -4,9 +4,12 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eshop.model.BackupDB;
+import com.eshop.model.InsertDataTable;
 
 @Controller
 public class AppController {
@@ -52,11 +55,19 @@ public class AppController {
 		return modelandview;
 	}
 
+	@RequestMapping(value = ("/"), method = RequestMethod.GET)
+	public String startPage() {
+		InsertDataTable.getInstance().createDataTable();
+		return "InsertData";
+	}
+
 	@RequestMapping("webshop/insertDataTable")
-	public ModelAndView insertDataTable() {
+	public ModelAndView insertDataTable(@RequestParam(value = "name") String name,
+			@RequestParam(value = "amount") String amount) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		Sql sql = new Sql();
-		modelandview.addObject("msg", sql.sqlInsertCheck());
+		InsertDataTable insertData = InsertDataTable.getInstance();
+		insertData.insertDataInTable(name, amount);
+		modelandview.addObject("msg", insertData.getInsertResult());
 		return modelandview;
 	}
 
