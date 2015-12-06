@@ -11,7 +11,7 @@ import com.mysql.jdbc.Statement;
 
 public class SelectDataTable {
 	private static final String USER_NAME = "root";
-	private static final String PASSWORD = "1111";
+	private static final String PASSWORD = "root";
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/e-shop";
 	private static final String TABLE_NAME = "trafficlight";
 
