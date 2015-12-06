@@ -82,7 +82,12 @@ public class Sql {
 			// Execute a query
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
-			String sql = "INSERT INTO `e-shop`.`customers` (`id`, `name`) VALUES ('2', 'RedBull');";
+			//String sql = "INSERT INTO `e-shop`.`customers` (`id`, `name`) VALUES ('2', 'RedBull');";
+			String sql ="CREATE TABLE trafficlight ("
+        		+ "id INT NOT NULL AUTO_INCREMENT,"
+        		+ "minute INT NOT NULL,"
+        		+ "color VARCHAR(6) NOT NULL,"
+        		+ "PRIMARY KEY (id));";
 			//ResultSet rs = stmt.executeQuery(sql);
 			stmt.executeUpdate(sql);
 			System.out.println("Table Updated");

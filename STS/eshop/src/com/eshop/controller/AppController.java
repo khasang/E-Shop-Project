@@ -37,6 +37,8 @@ public class AppController {
 	@RequestMapping("webshop/CreateDataTable")
 	public ModelAndView createDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
+		Sql sql = new Sql();
+		sql.sqlInsertCheck();
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
