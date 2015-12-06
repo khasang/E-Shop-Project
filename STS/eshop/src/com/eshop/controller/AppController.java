@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.eshop.model.BackupDB;
 import com.eshop.model.InsertDataTable;
 import com.eshop.model.SelectDataTable;
+=======
+import com.eshop.model.DeleteDataTable;
+>>>>>>> APestov
 
 @Controller
 public class AppController {
@@ -41,11 +45,18 @@ public class AppController {
 		modelandview.addObject("msg", Sql.sqlCheck);
 		return modelandview;
 	}
+<<<<<<< HEAD
 
 	@RequestMapping("webshop/DeleteDataTable")
+=======
+	
+	@RequestMapping("webshop/deletedatatable")
+>>>>>>> APestov
 	public ModelAndView deleteDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		DeleteDataTable deleteDataTable = DeleteDataTable.getInstance();
+		deleteDataTable.deleteTable("trafficlight");
+		modelandview.addObject("msg", deleteDataTable.getResultMessage());
 		return modelandview;
 	}
 
