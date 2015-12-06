@@ -74,10 +74,9 @@ public class AppController {
 	}
 
 	@RequestMapping("webshop/SelectDataTable")
-	public ModelAndView selectDataTable() throws SQLException {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		Sql sql = new Sql();
-		modelandview.addObject("msg", sql.selectSupplierName());
+	public ModelAndView selectDataTable() {
+		ModelAndView modelandview = new ModelAndView("SelectDataTable");
+		modelandview.addObject("list", new SelectDataTable().viewTable());
 		return modelandview;
 	}
 
