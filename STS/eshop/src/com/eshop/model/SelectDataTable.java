@@ -14,59 +14,57 @@ public class SelectDataTable {
 	private static final String PASSWORD = "1111";
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/e-shop";
 	private static final String TABLE_NAME = "trafficlight";
-	public List<DataTable> list = new ArrayList<>();
 
 	public SelectDataTable() {
-		try {
-			viewTable(getConnection());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
-	private Connection getConnection() throws SQLException {
+	private Connection getConnection() {
+		Connection connection = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // it's need for work
 													// connection
+			connection = (Connection) DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		System.out.println("Connected to database");
-		return (Connection) DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
+		return connection;
 	}
 
-	private void viewTable(Connection con) {
-		Statement stmt = null;
-		DataTable dt = new DataTable();
+	public List<DataTable> viewTable() {
+		List<DataTable> list = new ArrayList<>();
+		Statement statement = null;
+		Connection connection = getConnection();
 		String query = "select ID, minute, color " + "from " + TABLE_NAME;
 		try {
-			stmt = (Statement) con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				int id = rs.getInt("ID");
-				int minute = rs.getInt("minute");
-				String color = rs.getString("color");
-				System.out.println("ID = " + id + " minute = " + minute + " color = " + color);
-				dt.setID(id);
-				dt.setMinute(minute);
-				dt.setColor(color);
-				list.add(dt);
+			statement = (Statement) connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				DataTable dataTable = new DataTable();
+				dataTable.setID(resultSet.getInt("ID"));
+				dataTable.setMinute(resultSet.getInt("minute"));
+				dataTable.setColor(resultSet.getString("color"));
+				list.add(dataTable);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			try {
+				if (statement != null) {
+					statement.close();
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				con.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return list;
 	}
 }

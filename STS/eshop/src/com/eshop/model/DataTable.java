@@ -5,6 +5,11 @@ public class DataTable {
 	private int minute;
 	private String color;
 	
+	@Override
+	public String toString() {
+		return "<tr><td> " + ID + " </td> <td> " + minute + " </td><td> " + color + " </td></tr>";
+	}
+	
 	public int getID() {
 		return ID;
 	}
