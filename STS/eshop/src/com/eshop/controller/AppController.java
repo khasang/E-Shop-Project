@@ -10,6 +10,8 @@ import com.eshop.model.InsertDataTable;
 import com.eshop.model.SelectDataTable;
 import com.eshop.model.DeleteDataTable;
 
+import com.eshop.model.CreateDataTable;
+
 @Controller
 public class AppController {
 	@RequestMapping("/webshop")
@@ -36,9 +38,13 @@ public class AppController {
 	@RequestMapping("webshop/CreateDataTable")
 	public ModelAndView createDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
+<<<<<<< HEAD
 		Sql sql = new Sql();
 		sql.sqlInsertCheck();
 		modelandview.addObject("msg", Sql.sqlCheck);
+=======
+		modelandview.addObject("msg", CreateDataTable.class);
+>>>>>>> agurin
 		return modelandview;
 	}
 	
