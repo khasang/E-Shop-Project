@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eshop.model.CreateDataTable;
+
 @Controller
 public class AppController {
 	@RequestMapping("/webshop")
@@ -30,7 +32,7 @@ public class AppController {
 	@RequestMapping("webshop/CreateDataTable")
 	public ModelAndView createDataTable() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+		modelandview.addObject("msg", CreateDataTable.class);
 		return modelandview;
 	}
 	
