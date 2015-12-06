@@ -3,4 +3,8 @@
   <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v7.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v7.0 Server at localhost" name="Tomcat v7.0 Server at localhost" runtime-id="Apache Tomcat v7.0" server-type="org.eclipse.jst.server.tomcat.70" server-type-id="org.eclipse.jst.server.tomcat.70" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
     <list key="modules" value0="EShopProj::org.eclipse.jst.jee.server:EShopProj::jst.web::3.0"/>
   </server>
+  <server auto-publish-setting="2" auto-publish-time="1" com.springsource.tcserver.asf="false" com.springsource.tcserver.name="base-instance" configuration-id="/Servers2/Pivotal tc Server Developer Edition v3.1-config" deployDir="wtpwebapps" hostname="localhost" id="Pivotal tc Server Developer Edition v3.1" id-set="true" name="Pivotal tc Server Developer Edition v3.1" runtime-id="Pivotal tc Server Developer Edition (Runtime) v3.1" saveSeparateContextFiles="true" server-type="com.pivotal.server.tc.80" server-type-id="com.pivotal.server.tc.80" start-timeout="120" stop-timeout="15" testEnvironment="false" timestamp="0">
+    <list key="addExtraVmArgs" value0="-Dinsight.enabled=false"/>
+    <list key="removeExtraVmArgs"/>
+  </server>
 </servers>

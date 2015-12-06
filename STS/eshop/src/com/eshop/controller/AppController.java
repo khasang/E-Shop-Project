@@ -6,11 +6,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.eshop.model.BackupDB;
+<<<<<<< HEAD
 import com.eshop.model.InsertDataTable;
 import com.eshop.model.SelectDataTable;
 import com.eshop.model.DeleteDataTable;
 
 import com.eshop.model.CreateDataTable;
+=======
+import com.eshop.model.ShrinkDataDB;
+>>>>>>> ismirnov
 
 @Controller
 public class AppController {
@@ -88,9 +92,14 @@ public class AppController {
 	}
 
 	@RequestMapping("webshop/ShrinkDataDB")
-	public ModelAndView shrinkDataDB() {
+	public ModelAndView shrinkDataDB() throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
+<<<<<<< HEAD
 		modelandview.addObject("msg", Sql.sqlCheck);
+=======
+		//new
+		modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
+>>>>>>> ismirnov
 		return modelandview;
 	}
 }
