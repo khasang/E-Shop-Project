@@ -1,42 +1,34 @@
 package com.eshop.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 public class DeleteDataTable {
-	private static DeleteDataTable instance;
-	SimpleDriverDataSource dataSource;
-	JdbcTemplate jdbcTemplate;
-	String resultMessage;
-	
+	private JdbcTemplate jdbcTemplate;
+	private String result;
 
-	private DeleteDataTable() {
-		dataSource = new SimpleDriverDataSource();
-		dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
-		dataSource.setUrl("jdbc:mysql://localhost/eshop");
-		dataSource.setUsername("root");
-		dataSource.setPassword("root");
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}	
-
-	public static DeleteDataTable getInstance() {
-		if (instance == null) {
-			instance = new DeleteDataTable();
-		}
-		return instance;
+	public DeleteDataTable(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	public void deleteTable(String tableName){
-		try{
-		jdbcTemplate.execute("DROP TABLE "+ tableName);
-		resultMessage = "Table " + tableName + " deleted successfully";
-		}catch(Exception e){
-			resultMessage = "Error ocurred: " + e;
-			e.printStackTrace();
+
+	public void dropDataTable(String tableName) {
+		try {
+			jdbcTemplate.execute("DROP TABLE `eshop`.`" + tableName.toLowerCase() + "` ");
+			result = "Table " + tableName + " deleted";
+		} catch (Exception e) {
+			result = "Error on delete table " + tableName;
 		}
 	}
-	
-	public String getResultMessage(){
-		return resultMessage;
+
+	public void deleteDataFromTable(String selectedOrderId) {
+		try {
+			int id = Integer.parseInt(selectedOrderId);
+			jdbcTemplate.execute("DELETE FROM product WHERE id=" + id + ";");
+		} catch (Exception e) {
+			result = "Error on delete product  id" + selectedOrderId;
+		}
+	}
+
+	public String getResult() {
+		return result;
 	}
 }

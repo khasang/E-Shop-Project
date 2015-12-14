@@ -14,6 +14,10 @@
 		<%@ include file="/WEB-INF/leftMenu.jsp"%>
 		<div class="content" align="center">
 			<h1>${result}</h1>
+			<form action="deleteDataTable" method="post">
+				Delete table <input type="text" id="tableName" name="tableName" />
+				<input type="submit" value="Delete table"></input>
+			</form>
 		</div>
 	</div>
 </body>

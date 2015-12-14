@@ -2,7 +2,6 @@ package com.eshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.eshop.model.BackupDB;
@@ -18,7 +17,16 @@ import com.eshop.model.ShrinkDataDB;
 
 @Controller
 public class AppController {
-	@RequestMapping("/webshop")
+	@Autowired
+	InsertDataTable insertDataTable;
+	@Autowired
+	CreateDataTable createDataTable;
+	@Autowired
+	DeleteDataTable deleteDataTable;
+	@Autowired
+	SelectDataTable selectDataTable;
+
+	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("msg", "You can buy different things at our shop!");
@@ -32,10 +40,16 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/BackupDB")
-	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", new BackupDB().backupResultOutput());
+	@RequestMapping("createtable")
+	public String createTableView() {
+		return "createtable";
+	}
+
+	@RequestMapping("createDataTable")
+	public ModelAndView createDataTable(@RequestParam(value = "tableName") String tableName) {
+		ModelAndView modelandview = new ModelAndView("createtable");
+		createDataTable.createDataTable(tableName);
+		modelandview.addObject("result", createDataTable.getResult());
 		return modelandview;
 	}
 
@@ -48,35 +62,29 @@ public class AppController {
 		modelandview.addObject("msg", Sql.sqlCheck);
 =======
 		modelandview.addObject("msg", CreateDataTable.class);
->>>>>>> agurin
 		return modelandview;
 	}
-	
-	@RequestMapping("webshop/deletedatatable")
-	public ModelAndView deleteDataTable() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
+
+	@RequestMapping("insertdata")
+	public ModelAndView insertDataView() {
+		ModelAndView modelandview = new ModelAndView("insertdata");
 		DeleteDataTable deleteDataTable = DeleteDataTable.getInstance();
 		deleteDataTable.deleteTable("trafficlight");
 		modelandview.addObject("msg", deleteDataTable.getResultMessage());
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/DescribeTableInfoColumns")
-	public ModelAndView describeTableInfoColumns() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", Sql.sqlCheck);
+	@RequestMapping("insertDataTable")
+	public ModelAndView insertDataTable(@RequestParam(value = "tableName") String tableName,
+			@RequestParam(value = "name") String name, @RequestParam(value = "amount") String amount) {
+		ModelAndView modelandview = new ModelAndView("insertdata");
+		insertDataTable.insertDataInTable(tableName, name, amount);
+		modelandview.addObject("result", insertDataTable.getResult());
 		return modelandview;
 	}
 
-	@RequestMapping(value = ("/"), method = RequestMethod.GET)
-	public String startPage() {
-		InsertDataTable.getInstance().createDataTable();
-		return "InsertData";
-	}
-
-	@RequestMapping("webshop/insertDataTable")
-	public ModelAndView insertDataTable(@RequestParam(value = "name") String name,
-			@RequestParam(value = "amount") String amount) {
+	@RequestMapping("selectdata")
+	public ModelAndView selectDataView() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		InsertDataTable insertData = InsertDataTable.getInstance();
 		insertData.insertDataInTable(name, amount);
@@ -84,7 +92,7 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/SelectDataTable")
+	@RequestMapping("selectDataTable")
 	public ModelAndView selectDataTable() {
 		ModelAndView modelandview = new ModelAndView("SelectDataTable");
 		modelandview.addObject("list", new SelectDataTable().viewTable());
@@ -94,12 +102,10 @@ public class AppController {
 	@RequestMapping("webshop/ShrinkDataDB")
 	public ModelAndView shrinkDataDB() throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-<<<<<<< HEAD
 		modelandview.addObject("msg", Sql.sqlCheck);
-=======
-		//new
+		return modelandview;
+	}
 		modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
->>>>>>> ismirnov
 		return modelandview;
 	}
 }
