@@ -54,5 +54,6 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
+	
 	<bean id="driver" class="com.mysql.jdbc.Driver" />
 </beans>
