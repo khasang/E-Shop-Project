@@ -13,6 +13,7 @@ import com.eshop.model.ShrinkDataDB;
 
 @Controller
 public class AppController {
+	
 	@Autowired
 	InsertDataTable insertDataTable;
 	@Autowired
