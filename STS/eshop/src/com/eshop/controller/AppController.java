@@ -82,11 +82,11 @@ public class AppController {
 	}
 
 	@RequestMapping("selectDataTable")
-	public ModelAndView selectDataTable() {
-		ModelAndView modelandview = new ModelAndView("SelectDataTable");
-		modelandview.addObject("list", new SelectDataTable().viewTable());
-		return modelandview;
-	}
+	 public ModelAndView selectDataTable(@RequestParam(value = "tableName") String tableName) {
+	  ModelAndView modelandview = new ModelAndView("selectdatatable");
+	  modelandview.addObject("list", selectDataTable.viewTable(tableName));
+	  return modelandview;
+	 }
 
 	@RequestMapping("webshop/ShrinkDataDB")
 	public ModelAndView shrinkDataDB() throws SQLException{
