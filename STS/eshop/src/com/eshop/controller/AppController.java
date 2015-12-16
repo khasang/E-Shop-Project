@@ -7,10 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.eshop.model.*;
+import com.eshop.model.BackupDB;
+import com.eshop.model.InsertDataTable;
+import com.eshop.model.SelectDataTable;
+import com.eshop.model.DeleteDataTable;
+import com.eshop.model.CreateDataTable;
+import com.eshop.model.ShrinkDataDB;
 
 @Controller
 public class AppController {
+	
 	@Autowired
 	InsertDataTable insertDataTable;
 	@Autowired
@@ -23,7 +29,14 @@ public class AppController {
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", "Welcome to our Eshop project!");
+		modelandview.addObject("msg", "You can buy different things at our shop!");
+		return modelandview;
+	}
+
+	@RequestMapping("webshop/welcome")
+	public ModelAndView hello() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", "You can buy different things at our shop!");
 		return modelandview;
 	}
 
@@ -40,16 +53,10 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("deletetable")
-	public String deleteTableView() {
-		return "deletetable";
-	}
-
-	@RequestMapping("deleteDataTable")
-	public ModelAndView deleteDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("deletetable");
-		deleteDataTable.dropDataTable(tableName);
-		modelandview.addObject("result", deleteDataTable.getResult());
+	@RequestMapping("webshop/CreateDataTable")
+	public ModelAndView createDataTable() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("msg", CreateDataTable.class);
 		return modelandview;
 	}
 
@@ -75,36 +82,16 @@ public class AppController {
 	}
 
 	@RequestMapping("selectDataTable")
-	public ModelAndView selectDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("selectdatatable");
-		modelandview.addObject("list", selectDataTable.viewTable(tableName));
+	public ModelAndView selectDataTable() {
+		ModelAndView modelandview = new ModelAndView("SelectDataTable");
+		modelandview.addObject("list", new SelectDataTable().viewTable());
 		return modelandview;
 	}
 
-	@RequestMapping("backupdb")
-	public ModelAndView backupDB() {
+	@RequestMapping("webshop/ShrinkDataDB")
+	public ModelAndView shrinkDataDB() throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", new BackupDB().backupResultOutput());
+		modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
 		return modelandview;
 	}
-
-	@RequestMapping("shrinkdatadb")
-	public ModelAndView shrinkDataDB() throws SQLException {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		//ShrinkDataDB sh = (ShrinkDataDB) context.getBean("shrink");
-		modelandview.addObject("result", new ShrinkDataDB().shrinkDataDB());
-		return modelandview;
-	}
-
-	// @RequestMapping("webshop/DescribeTableInfoColumns")
-	// public ModelAndView describeTableInfoColumns() {
-	// ModelAndView modelandview = new ModelAndView("E-Shop");
-	// return modelandview;
-	// }
-	// @RequestMapping("webshop/ShrinkDataDB")
-	// public ModelAndView shrinkDataDB() {
-	// ModelAndView modelandview = new ModelAndView("E-Shop");
-	// modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
-	// return modelandview;
-	// }
 }
