@@ -5,11 +5,9 @@
 		<li><a href="createtable">Create Table</a></li>
 		<li><a href="deletetable">Delete Table</a></li>
 		<li><a href="insertdata">Insert Data Table</a></li>
-		<li><a href="selectdata">Select Data
-				Table</a></li>
+		<li><a href="selectdata">Select Data Table</a></li>
 		<li><a href="backupdb" class="notactive">Backup DB</a></li>
-		<li><a href="describetableinfocolumns" class="notactive">Describe
-				Table Info Columns</a></li>
+		<li><a href="describe">Describe Table</a></li>
 		<li><a href="?p=shrinkdatadb" class="notactive">Shrink Data
 				DB</a></li>
 	</ol>
