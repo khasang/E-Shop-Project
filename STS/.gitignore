@@ -26,3 +26,5 @@
 /RemoteSystemTempFiles/
 >>>>>>> APestov
 /Tomcat v7.0 Server at localhost-config/
+*.project
+*.classpath
