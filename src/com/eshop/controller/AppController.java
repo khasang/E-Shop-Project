@@ -107,4 +107,17 @@ public class AppController {
 		modelandview.addObject("list", selectDataTable.viewTable(tableName));
 		return modelandview;
 	}
+	
+	@RequestMapping("describeTable")
+	public ModelAndView describeTableView() {
+		ModelAndView modelandview = new ModelAndView("describetable");
+		return modelandview;
+	}
+	
+	@RequestMapping("describeTableInfoColumns")
+	public ModelAndView describeTableInfoColumns(@RequestParam(value = "submit") String submit) {
+		ModelAndView modelandview = new ModelAndView("describetable");
+		// работа с данными из .jsp файла ... modelandview.addObject(...);
+		return modelandview;
+	}
 }
