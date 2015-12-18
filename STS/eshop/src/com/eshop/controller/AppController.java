@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.InternalResourceView;
+
 import com.eshop.model.BackupDB;
 import com.eshop.model.InsertDataTable;
 import com.eshop.model.SelectDataTable;
@@ -25,7 +28,11 @@ public class AppController {
 	DeleteDataTable deleteDataTable;
 	@Autowired
 	SelectDataTable selectDataTable;
-
+	@Autowired
+	BackupDB backupDB;
+	@Autowired
+	ShrinkDataDB shrinkDataDB;
+	
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
@@ -40,6 +47,20 @@ public class AppController {
 		return modelandview;
 	}
 
+	@RequestMapping("/backup")
+	public ModelAndView backupDBView() {
+		ModelAndView modelandview = new ModelAndView("backup");		
+		return modelandview;
+	}
+	
+	@RequestMapping("/BackupDB")
+	public ModelAndView backupDB(@RequestParam(value = "path") String path) {
+		ModelAndView modelandview = new ModelAndView("E-Shop");		
+		backupDB.setPath(path);
+		modelandview.addObject("msg", backupDB.backupResultOutput());
+		return modelandview;
+	}
+	
 	@RequestMapping("createtable")
 	public String createTableView() {
 		return "createtable";
@@ -88,10 +109,12 @@ public class AppController {
 	  return modelandview;
 	 }
 
-	@RequestMapping("webshop/ShrinkDataDB")
+	@RequestMapping("/ShrinkDataDB")
 	public ModelAndView shrinkDataDB() throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
+		modelandview.addObject("listTables", shrinkDataDB.optimizeAllTables());	
+		View view = new InternalResourceView( "/WEB-INF/shrink.jsp") ;
+		modelandview.setView(view);
 		return modelandview;
 	}
 }

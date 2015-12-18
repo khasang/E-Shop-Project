@@ -36,7 +36,7 @@
 	</bean>
 
 	<bean id="shrink" class="com.eshop.model.ShrinkDataDB">
-		
+		<constructor-arg ref="jdbcTemplate" />		
 	</bean>
 
 	<bean id="insertDataTable" class="com.eshop.model.InsertDataTable">
