@@ -10,9 +10,16 @@ public class ShrinkDataDB {
 	private JdbcTemplate jdbcTemplate;
 	private List<String> tablesToOptimize;
 	
+	public List<String> getTablesToOptimize() {
+		return tablesToOptimize;
+	}
+
 	public void setTablesToOptimize(List<String> tablesToOptimize) {
 		this.tablesToOptimize = tablesToOptimize;
 	}
+	
+	public ShrinkDataDB() {
+		}
 
 	public ShrinkDataDB(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
