@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,21 +17,23 @@
 		<%@ include file="/WEB-INF/leftMenu.jsp"%>
 		<div class="content" align="center">
 			<p align=center>Select a table for shrink:</p>
-			<form:form method="POST" action="/ShrinkDataDB" modelAttribute="listTables" >
-			<table>
-				<tr>
-					<th>Table name</th>
-					<th>&nbsp;
-				</tr>
-				<c:forEach var="tableName" items="${listTables}">
+			<form:form action="ShrinkDataDB" modelAttribute="OptimizedTables">
+				<table border="1">
 					<tr>
-						<td>${tableName}</td>
-						<!-- td><input type="checkbox" name="table" id="table" value="${tableName}" /></td-->
-						<form:checkbox id="table" path="table"/>						
+						<th>Table name</th>
+						<th>&nbsp;
 					</tr>
-				</c:forEach>
-				<tr><td colspan="2" align="right"><input type="submit" value="OK"></td></tr>
-			</table>
+					<c:forEach var="tableName" items="${listTables}">
+						<tr>
+							<td>${tableName}</td>
+							<!-- td><input type="checkbox" name="table" value="${tableName}" /></td-->
+						<td><form:checkbox path="tablesList" value="${tableName}" checked="checked"/></td> 
+						</tr>
+					</c:forEach>
+					<tr>
+						<td colspan="2" align=""><input type="submit" value="OK"></td>
+					</tr>
+				</table>
 			</form:form>
 		</div>
 	</div>

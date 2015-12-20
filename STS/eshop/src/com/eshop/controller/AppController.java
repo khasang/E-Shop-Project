@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -117,14 +118,16 @@ public class AppController {
 	public ModelAndView show(){
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.setViewName("ShowTables");
-		modelandview.addObject("listTables", show.listTables());
+		List<String>listTables=show.listTables();
+		modelandview.addObject("listTables", listTables);
+		modelandview.addObject("OptimizedTables",new ShowTableDB());
 		return modelandview;
 	}
 
 	@RequestMapping("/ShrinkDataDB")
-	public ModelAndView shrinkDataDB(@RequestParam(value = "table")List<String> table) throws SQLException{
+	public ModelAndView shrinkDataDB(@ModelAttribute("OptimizedTables") ShowTableDB optimizedTables) throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		shrinkDataDB.setTablesToOptimize(table);
+		shrinkDataDB.setTablesToOptimize(optimizedTables.getTablesList());
 		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());	
 		View view = new InternalResourceView( "/WEB-INF/shrink.jsp") ;
 		modelandview.setView(view);
