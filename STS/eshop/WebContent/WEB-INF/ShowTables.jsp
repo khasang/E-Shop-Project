@@ -25,8 +25,7 @@
 					</tr>
 					<c:forEach var="tableName" items="${listTables}">
 						<tr>
-							<td>${tableName}</td>
-							<!-- td><input type="checkbox" name="table" value="${tableName}" /></td-->
+  					    <td>${tableName}</td>
 						<td><form:checkbox path="tablesList" value="${tableName}" checked="checked"/></td> 
 						</tr>
 					</c:forEach>
