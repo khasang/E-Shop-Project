@@ -8,15 +8,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ShrinkDataDB {
 	private JdbcTemplate jdbcTemplate;
+	private List<String> tablesToOptimize;
+	
+	public void setTablesToOptimize(List<String> tablesToOptimize) {
+		this.tablesToOptimize = tablesToOptimize;
+	}
+
 	public ShrinkDataDB(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
-	public List<LogRecord> optimizeAllTables(){
+	
+	public List<LogRecord> optimizeTables(){
 		LogRecord optimizeResult;
 		List<LogRecord> resultList = new ArrayList<LogRecord>();
-	  	List<String> tableList = jdbcTemplate.queryForList("SHOW TABLES FROM ESHOP",String.class);
-	  for(String tableName:tableList){  
+	  for(String tableName:tablesToOptimize){  
 		  optimizeResult = shrinkDataDB(tableName);
 		  resultList.add(optimizeResult);
 	      saveToLog(optimizeResult);	    
@@ -24,12 +29,16 @@ public class ShrinkDataDB {
 	  	return resultList;
 	}
 	
-   public void saveToLog(LogRecord record){
-		 jdbcTemplate.update("INSERT INTO eshop.log(dt,table_name,operation,result) "
-		 		+ "VALUES(sysdate(), ?, ?, ?)", 
-				record.getTableName(),
-				record.getOperation(),
-				record.getResult());
+   public void saveToLog(LogRecord record){  
+		 try {
+			jdbcTemplate.update("INSERT INTO eshop.log(dt,table_name,operation,result) "
+			 		+ "VALUES(sysdate(), ?, ?, ?)", 
+					record.getTableName(),
+					record.getOperation(),
+					record.getResult());
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
    }
 	
 	public LogRecord shrinkDataDB(String tableName) {
@@ -39,6 +48,7 @@ public class ShrinkDataDB {
 			 operationResult = "success";			 
 		} catch (DataAccessException e) {
 			operationResult = "error: " + e;
+			e.printStackTrace();
 		 }		
 		return new LogRecord(tableName,"optimize",operationResult);
 	}

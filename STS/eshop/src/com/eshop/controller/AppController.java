@@ -1,6 +1,7 @@
 package com.eshop.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import com.eshop.model.BackupDB;
 import com.eshop.model.InsertDataTable;
 import com.eshop.model.SelectDataTable;
+import com.eshop.model.ShowTableDB;
 import com.eshop.model.DeleteDataTable;
 import com.eshop.model.CreateDataTable;
 import com.eshop.model.ShrinkDataDB;
@@ -32,6 +34,8 @@ public class AppController {
 	BackupDB backupDB;
 	@Autowired
 	ShrinkDataDB shrinkDataDB;
+	@Autowired
+	ShowTableDB show;
 	
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
@@ -108,11 +112,20 @@ public class AppController {
 	  modelandview.addObject("list", selectDataTable.viewTable(tableName));
 	  return modelandview;
 	 }
+	
+	@RequestMapping("/ShowTables")
+	public ModelAndView show(){
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.setViewName("ShowTables");
+		modelandview.addObject("listTables", show.listTables());
+		return modelandview;
+	}
 
 	@RequestMapping("/ShrinkDataDB")
-	public ModelAndView shrinkDataDB() throws SQLException{
+	public ModelAndView shrinkDataDB(@RequestParam(value = "table")List<String> table) throws SQLException{
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("listTables", shrinkDataDB.optimizeAllTables());	
+		shrinkDataDB.setTablesToOptimize(table);
+		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());	
 		View view = new InternalResourceView( "/WEB-INF/shrink.jsp") ;
 		modelandview.setView(view);
 		return modelandview;

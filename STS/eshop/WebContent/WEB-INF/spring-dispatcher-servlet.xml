@@ -34,6 +34,10 @@
 	<bean id="selectDataTable" class="com.eshop.model.SelectDataTable">
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>
+	
+	<bean id="ShowTableDB" class="com.eshop.model.ShowTableDB">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
 
 	<bean id="shrink" class="com.eshop.model.ShrinkDataDB">
 		<constructor-arg ref="jdbcTemplate" />		
