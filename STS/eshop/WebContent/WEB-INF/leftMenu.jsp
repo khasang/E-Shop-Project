@@ -8,9 +8,7 @@
 		<li><a href="selectdata">Select Data
 				Table</a></li>
 		<li><a href="backupdb" class="notactive">Backup DB</a></li>
-		<li><a href="describetableinfocolumns" class="notactive">Describe
-				Table Info Columns</a></li>
-		<li><a href="?p=shrinkdatadb" class="notactive">Shrink Data
-				DB</a></li>
+		<li><a href="describe">Describe	Table Info Columns</a></li>
+		<li><a href="ShowTables" class="notactive">Shrink Data DB</a></li>
 	</ol>
 </div>

@@ -4,11 +4,15 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.InternalResourceView;
 import com.eshop.model.*;
+import java.util.List;
 
 @Controller
 public class AppController {
@@ -20,6 +24,10 @@ public class AppController {
 	DeleteDataTable deleteDataTable;
 	@Autowired
 	SelectDataTable selectDataTable;
+	@Autowired
+	ShrinkDataDB shrinkDataDB;
+	@Autowired
+	ShowTableDB show;
 
 	@RequestMapping("orderslist")
 	public ModelAndView orderListView() {
@@ -117,16 +125,40 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/DescribeTableInfoColumns")
-	public ModelAndView describeTableInfoColumns() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
+	@RequestMapping("describe")
+	public ModelAndView describeView() {
+		ModelAndView modelandview = new ModelAndView("describetable");
+		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
 		return modelandview;
 	}
 
-	@RequestMapping("webshop/ShrinkDataDB")
-	public ModelAndView shrinkDataDB() throws SQLException {
+	@RequestMapping(value = "describeTable", method = RequestMethod.POST)
+	public ModelAndView describeTable(@RequestParam(value = "tablesInDB") String selectedTable) {
+		ModelAndView modelandview = new ModelAndView("describetable");
+		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
+		modelandview.addObject("listOfTableColumns", selectDataTable.getTableColumnName(selectedTable));
+		return modelandview;
+	}
+
+	@RequestMapping("/ShowTables")
+	public ModelAndView show() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", new ShrinkDataDB().shrinkDataDB());
+		modelandview.setViewName("ShowTables");
+		List<String> listTables = show.listTables();
+		modelandview.addObject("listTables", listTables);
+		modelandview.addObject("OptimizedTables", new ShowTableDB());
+		return modelandview;
+	}
+
+	//todo new
+	@RequestMapping("/ShrinkDataDB")
+	public ModelAndView shrinkDataDB(@ModelAttribute("OptimizedTables") ShowTableDB optimizedTables)
+			throws SQLException { //todo fix Exception
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		shrinkDataDB.setTablesToOptimize(optimizedTables.getTablesList());
+		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());
+		View view = new InternalResourceView("/WEB-INF/shrink.jsp");
+		modelandview.setView(view);
 		return modelandview;
 	}
 }

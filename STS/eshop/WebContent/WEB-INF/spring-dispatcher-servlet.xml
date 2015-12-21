@@ -28,25 +28,26 @@
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>
 
-	<bean id="describeTableInfoColumns" class="com.eshop.model.DescribeTableInfoColumns">
-	</bean>
-
 	<bean id="selectDataTable" class="com.eshop.model.SelectDataTable">
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>
 
 	<bean id="shrink" class="com.eshop.model.ShrinkDataDB">
-		
+		<constructor-arg ref="jdbcTemplate" /> 
 	</bean>
 
 	<bean id="insertDataTable" class="com.eshop.model.InsertDataTable">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+	
+	<bean id="ShowTableDB" class="com.eshop.model.ShowTableDB">
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driver" ref="driver" />
