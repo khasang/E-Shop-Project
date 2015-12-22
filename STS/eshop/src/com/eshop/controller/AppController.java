@@ -29,6 +29,15 @@ public class AppController {
 	@Autowired
 	ShowTableDB show;
 
+	@RequestMapping("login")
+	public String login(){
+		return "login";
+	}
+	
+	@RequestMapping("registration")
+	public String registration(){
+		return "registration";
+	}
 	@RequestMapping("orderslist")
 	public ModelAndView orderListView() {
 		ModelAndView modelandview = new ModelAndView("orders");
