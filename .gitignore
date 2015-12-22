@@ -17,5 +17,9 @@ hs_err_pid*
 /Servers/
 /src/
 *.project
+<<<<<<< HEAD
 /Новая папка/
 /Servers2/
+=======
+/build/
+>>>>>>> origin/dev-AGalochkin-SpringSecurity

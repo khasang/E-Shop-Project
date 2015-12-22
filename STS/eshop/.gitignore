@@ -1,2 +1,8 @@
 /build/
 /.settings/
+/bin/
+/gradle/
+/.gradle/
+*.bat
+/gradlew
+/settings.gradle
