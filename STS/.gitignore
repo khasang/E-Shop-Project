@@ -1,0 +1,9 @@
+/eshop1/
+/RemoteSystemsTempFiles/
+/Servers/
+/Tomcat v7.0 Server at localhost-config/
+/.settings/
+/.recommenders/
+/.metadata/
+*.classpath
+*.project

@@ -1,0 +1,8 @@
+/src/
+/Servers/
+/RemoteSystemsTempFiles/
+/Eclipse/
+/.recommenders/
+/.metadata/
+*.exe
+*.classpath
