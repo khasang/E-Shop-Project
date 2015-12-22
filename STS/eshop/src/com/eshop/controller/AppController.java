@@ -106,7 +106,7 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("insertDataTable")
+	@RequestMapping("insertdatatable")
 	public ModelAndView insertDataTable(@RequestParam(value = "tableTitleList") String tableName,
 			@RequestParam(value = "name") String name, @RequestParam(value = "amount") String amount) {
 		ModelAndView modelandview = new ModelAndView("insertdata");
