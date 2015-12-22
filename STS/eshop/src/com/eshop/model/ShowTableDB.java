@@ -12,20 +12,20 @@ public class ShowTableDB {
 	private JdbcTemplate jdbcTemplate;
 	private DatabaseMetaData dbmd = null;
 	private ResultSet resultSet = null;
-	private List<String> tablesList = new ArrayList<String>();
-
+	private List<String>tablesList = new ArrayList<String>();
+	
 	public void setTablesList(List<String> tablesList) {
 		this.tablesList = tablesList;
 	}
 
-	public List<String> getTablesList() {
+	public List<String>getTablesList() {
 		return tablesList;
 	}
 
 	public ShowTableDB(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
+	
 	public ShowTableDB() {
 
 	}
@@ -37,7 +37,8 @@ public class ShowTableDB {
 		try {
 			dbmd = jdbcTemplate.getDataSource().getConnection().getMetaData();
 			String[] types = { "TABLE" };
-			resultSet = dbmd.getTables(null, null, "%", types);
+			resultSet = dbmd.getTables(
+					null, null, "%", types);
 			while (resultSet.next()) {
 				String tableName = resultSet.getString(3);
 				tablesList.add(tableName);
