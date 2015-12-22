@@ -1,7 +1,6 @@
 package com.eshop.controller;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.InternalResourceView;
-
-import com.eshop.model.BackupDB;
-import com.eshop.model.InsertDataTable;
-import com.eshop.model.SelectDataTable;
-import com.eshop.model.ShowTableDB;
-import com.eshop.model.DeleteDataTable;
-import com.eshop.model.CreateDataTable;
-import com.eshop.model.ShrinkDataDB;
+import com.eshop.model.*;
+import java.util.List;
 
 @Controller
 public class AppController {
@@ -32,11 +25,11 @@ public class AppController {
 	@Autowired
 	SelectDataTable selectDataTable;
 	@Autowired
-	BackupDB backupDB;
-	@Autowired
 	ShrinkDataDB shrinkDataDB;
 	@Autowired
 	ShowTableDB show;
+	@Autowired
+	BackupDB backup;
 
 	@RequestMapping("login")
 	public String login(){
@@ -76,14 +69,10 @@ public class AppController {
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("msg", "You can buy different things at our shop!");
-		return modelandview;
-	}
-
 		modelandview.addObject("result", "Welcome to our Eshop project!");
 		return modelandview;
 	}
-	
+
 	@RequestMapping("createtable")
 	public String createTableView() {
 		return "createtable";
@@ -140,7 +129,7 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("/BackupDB")
+	@RequestMapping("/backupdb")
 	public ModelAndView backupDB() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("result", new BackupDB().backupResultOutput());
