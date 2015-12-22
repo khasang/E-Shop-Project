@@ -1,3 +1,0 @@
-eclipse.preferences.version=1
-module-start-timeout=300000
-runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime id\="Apache Tomcat v7.0" location\="C\:/Development/apache-tomcat-7.0.65" name\="Apache Tomcat v7.0" runtime-type-id\="org.eclipse.jst.server.tomcat.runtime.70" timestamp\="0"/>\r\n  <runtime id\="Pivotal tc Server Developer Edition (Runtime) v3.1" id-set\="true" location\="D\:/STS/sts-bundle/pivotal-tc-server-developer-3.1.2.RELEASE" name\="Pivotal tc Server Developer Edition (Runtime) v3.1" runtime-type-id\="com.pivotal.server.tc.runtime.80" timestamp\="0"/>\r\n</runtimes>\r\n
