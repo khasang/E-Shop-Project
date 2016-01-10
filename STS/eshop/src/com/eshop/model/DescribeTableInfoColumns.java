@@ -1,4 +1,8 @@
-/*package com.eshop.model;
+/*
+ * todo at future release
+ */
+
+/*package com.eshop.model; 
 
 import java.sql.*;
 import java.util.*;

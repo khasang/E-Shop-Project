@@ -3,12 +3,6 @@ package com.eshop.model;
 public class LogRecord {
 	private String tableName, operation, result;
 
-	/*public LogRecord(String tableName, String operation, String result, String string, String string2) {
-		this.tableName = tableName;
-		this.operation = operation;
-		this.result = result;
-	}*/
-	
 	public LogRecord(String tableName, String operation, String result) {
 		this.tableName = tableName;
 		this.operation = operation;

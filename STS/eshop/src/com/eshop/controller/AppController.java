@@ -1,18 +1,18 @@
 package com.eshop.controller;
 
-import java.sql.SQLException;
-
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.InternalResourceView;
 import com.eshop.model.*;
-import java.util.List;
+import com.eshop.service.*;
 
 @Controller
 public class AppController {
@@ -30,16 +30,56 @@ public class AppController {
 	ShowTableDB show;
 	@Autowired
 	BackupDB backup;
+	@Autowired
+	PasswordValidator passwordValidator;
+	@Resource(name = "userService")
+	UserService userService;
 
 	@RequestMapping("login")
-	public String login(){
+	public String login() {
 		return "login";
 	}
-	
+
 	@RequestMapping("registration")
-	public String registration(){
-		return "registration";
+	public ModelAndView registration() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("User", new User());
+		modelandview.setViewName("registration");
+		return modelandview;
 	}
+
+	@RequestMapping("adduser")
+	public ModelAndView registerUser(@ModelAttribute("User") User newUser, BindingResult result) {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		passwordValidator.validate(newUser, result);
+		if (!result.hasErrors()) {
+			try {
+				userService.update(newUser);
+				modelandview.addObject("result", "User " + newUser.getLogin() + " successfully added");
+			} catch (DataIntegrityViolationException e) {
+				result.reject("user.exists", "User already exists");
+			}
+		}
+		modelandview.setViewName("registration");
+		return modelandview;
+	}
+
+	@RequestMapping("/admin/manageusers")
+	public ModelAndView manageusers() {
+		ModelAndView modelandview = new ModelAndView("manageusers");
+		User user = new User();
+		modelandview.addObject("User", user);
+		modelandview.addObject("listUserRoles", user.getRolesValues());
+		modelandview.addObject("listUsers", userService.selAllUsers());
+		return modelandview;
+	}
+
+	@RequestMapping("/admin/updateRole")
+	public String updaterole(@ModelAttribute("User") User user) {
+		userService.update(user);
+		return "redirect:/admin/manageusers";
+	}
+
 	@RequestMapping("orderslist")
 	public ModelAndView orderListView() {
 		ModelAndView modelandview = new ModelAndView("orders");
@@ -119,31 +159,40 @@ public class AppController {
 	@RequestMapping("selectdata")
 	public ModelAndView selectDataView() {
 		ModelAndView modelandview = new ModelAndView("selectdatatable");
+		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
 		return modelandview;
 	}
 
 	@RequestMapping("selectDataTable")
-	public ModelAndView selectDataTable(@RequestParam(value = "tableName") String tableName) {
+	public ModelAndView selectDataTable(@RequestParam(value = "tableTitleList") String tableName) {
 		ModelAndView modelandview = new ModelAndView("selectdatatable");
+		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
 		modelandview.addObject("list", selectDataTable.viewTable(tableName));
 		return modelandview;
 	}
 
-	@RequestMapping("/backupdb")
-	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", new BackupDB().backupResultOutput());
+	@RequestMapping("/admin/backup")
+	public ModelAndView backupDBView() {
+		ModelAndView modelandview = new ModelAndView("backup");
 		return modelandview;
 	}
 
-	@RequestMapping("describe")
+	@RequestMapping("/admin/BackupDB")
+	public ModelAndView backupDB(@RequestParam(value = "path") String path) {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		backup.setPath(path);
+		modelandview.addObject("result", backup.backupResultOutput());
+		return modelandview;
+	}
+
+	@RequestMapping("/admin/describe")
 	public ModelAndView describeView() {
 		ModelAndView modelandview = new ModelAndView("describetable");
 		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
 		return modelandview;
 	}
 
-	@RequestMapping(value = "describeTable", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/describeTable", method = RequestMethod.POST)
 	public ModelAndView describeTable(@RequestParam(value = "tablesInDB") String selectedTable) {
 		ModelAndView modelandview = new ModelAndView("describetable");
 		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
@@ -151,25 +200,22 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("/ShowTables")
+	@RequestMapping("/admin/showtables")
 	public ModelAndView show() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.setViewName("ShowTables");
+		modelandview.setViewName("/showtables");
 		List<String> listTables = show.listTables();
 		modelandview.addObject("listTables", listTables);
 		modelandview.addObject("OptimizedTables", new ShowTableDB());
 		return modelandview;
 	}
 
-	//todo new
-	@RequestMapping("/ShrinkDataDB")
-	public ModelAndView shrinkDataDB(@ModelAttribute("OptimizedTables") ShowTableDB optimizedTables)
-			throws SQLException { //todo fix Exception
+	@RequestMapping("/admin/ShrinkDataDB")
+	public ModelAndView shrinkDataDB(@ModelAttribute("OptimizedTables") ShowTableDB optimizedTables) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		shrinkDataDB.setTablesToOptimize(optimizedTables.getTablesList());
 		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());
-		View view = new InternalResourceView("/WEB-INF/shrink.jsp");
-		modelandview.setView(view);
+		modelandview.setViewName("shrink");
 		return modelandview;
 	}
 }

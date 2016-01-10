@@ -1,17 +1,20 @@
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema//context/spring-context.xsd">
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<context:component-scan base-package="com.eshop.controller" />
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/WEB-INF/</value>
+			<value>/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
@@ -43,11 +46,15 @@
 	<bean id="ShowTableDB" class="com.eshop.model.ShowTableDB">
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>
-
+	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="userService" class="com.eshop.service.UserService" />
+	
+	<bean id="passwordValidator" class="com.eshop.service.PasswordValidator" />	
+		
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driver" ref="driver" />
@@ -55,6 +62,27 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-	
+			
+	<bean id="sessionFactory"
+    class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="packagesToScan" value="com.eshop.model" />
+      <property name="hibernateProperties">
+         <props>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+         </props>                  
+      </property>
+   </bean>
+   
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	 <bean id="transactionManager"
+    class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+ 
+   <bean id="persistenceExceptionTranslationPostProcessor"
+    class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+ 	
 	<bean id="driver" class="com.mysql.jdbc.Driver" />
 </beans>

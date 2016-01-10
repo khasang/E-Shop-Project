@@ -55,6 +55,7 @@ h1 {
 }
 
 .menu_left {
+	font-face: Arial,Helvetica,Sans-serif
 	background-color: #fff;
 	box-shadow: 1px 1px 5px #036969;
 	float: left;
@@ -81,6 +82,11 @@ h1 {
 	color: #036969;
 }
 
+a.header {
+	text-decoration: none;
+	color: #fff;
+}
+
 .content {
 	background-color: #fff;
 	box-shadow: 1px 1px 5px #036969;
@@ -95,4 +101,8 @@ h1 {
 	border-top-right-radius: 0px;
 	border-top: none;
 	margin-bottom: 30px;
+}
+
+.error {	
+	color: red; 
 }

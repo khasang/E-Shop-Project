@@ -13,9 +13,9 @@ public class DeleteDataTable {
 	public void dropDataTable(String tableName) {
 		try {
 			jdbcTemplate.execute("DROP TABLE `eshop`.`" + tableName.toLowerCase() + "` ");
-			result = "Table " + tableName + " deleted";
+			result = "Purchase " + tableName + " deleted";
 		} catch (Exception e) {
-			result = "Error on delete table " + tableName;
+			result = "Error on delete purchase " + tableName;
 		}
 	}
 

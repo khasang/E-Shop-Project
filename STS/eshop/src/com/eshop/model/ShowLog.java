@@ -1,3 +1,7 @@
+/*
+ * todo at future release
+ */
+
 /*package com.eshop.model;
 
 import java.sql.ResultSet;

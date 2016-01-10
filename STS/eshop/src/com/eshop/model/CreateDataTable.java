@@ -14,7 +14,7 @@ public class CreateDataTable {
 		try {
 			jdbcTemplate.execute("CREATE TABLE " + tableName
 					+ "(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(255),amount INT)");
-			result = "Table " + tableName + " created sucesfull!";
+			result = "Purchase " + tableName + " created successfully!";
 		} catch (Exception e) {
 			result = "Error on create " + tableName;
 			System.err.print(e);
