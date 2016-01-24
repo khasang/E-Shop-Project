@@ -1,175 +1,112 @@
 package com.eshop.controller;
 
-import java.sql.SQLException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.InternalResourceView;
-import com.eshop.model.*;
-import java.util.List;
+
+import com.eshop.model.Order;
+import com.eshop.model.User;
+import com.eshop.service.AccountService;
+import com.eshop.service.OrderService;
+import com.eshop.service.ProductService;
 
 @Controller
 public class AppController {
 	@Autowired
-	InsertDataTable insertDataTable;
+	AccountService accountService;
 	@Autowired
-	CreateDataTable createDataTable;
+	OrderService orderService;
 	@Autowired
-	DeleteDataTable deleteDataTable;
-	@Autowired
-	SelectDataTable selectDataTable;
-	@Autowired
-	ShrinkDataDB shrinkDataDB;
-	@Autowired
-	ShowTableDB show;
-	@Autowired
-	BackupDB backup;
+	ProductService productService;
 
-	@RequestMapping("login")
-	public String login(){
-		return "login";
-	}
-	
-	@RequestMapping("registration")
-	public String registration(){
-		return "registration";
-	}
-	@RequestMapping("orderslist")
-	public ModelAndView orderListView() {
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
+	@RequestMapping("/vieworder")
+	public String viewOrder() {
+		return "vieworder";
 	}
 
-	@RequestMapping(value = "deleteOrder", method = RequestMethod.POST)
-	public ModelAndView orderListDeleteItem(@RequestParam(value = "orderName") String selectedOrderId) {
-		deleteDataTable.deleteDataFromTable(selectedOrderId);
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
-	}
-
-	@RequestMapping(value = "insertOrder", method = RequestMethod.POST)
-	public ModelAndView orderListAddOrder(@RequestParam(value = "orderName") String orderName) {
-		insertDataTable.insertDataInTable(orderName);
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
+	@RequestMapping("/createorder")
+	public String createOrder() {
+		return "createorder";
 	}
 
 	@RequestMapping("/")
-	public ModelAndView inputForm() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", "Welcome to our Eshop project!");
-		return modelandview;
+	public ModelAndView indexPage(@ModelAttribute(value = "username") String username) {
+		ModelAndView model = new ModelAndView("index");
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addObject("result", "Welcome to EShop " + user.getUsername() + "!");
+		return model;
 	}
 
-	@RequestMapping("createtable")
-	public String createTableView() {
-		return "createtable";
+	@RequestMapping(value = "/newpurchase")
+	public String newPurchase() {
+		return "addpurchase";
 	}
 
-	@RequestMapping("createDataTable")
-	public ModelAndView createDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("createtable");
-		createDataTable.createDataTable(tableName);
-		modelandview.addObject("result", createDataTable.getResult());
-		return modelandview;
+	@RequestMapping(value = "/addpurchase")
+	public ModelAndView addNewPurchase(@RequestParam(value = "purchasename") String name) {
+		ModelAndView model = new ModelAndView("addpurchase");
+		String result;
+		if (name == null || name.equals("")) {
+			result = "Enter purchase name";
+		} else {
+			try {
+				User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				Order order = new Order(name, user);
+				user.getUserOrderList().add(order);
+				orderService.addOrder(order);
+				result = "Purchase:" + name + " was added.";
+			} catch (DataIntegrityViolationException e) {
+				result = "Purchase with " + name + " already exist.";
+			} catch (Exception e) {
+				result = "Error adding purchase.";
+			}
+		}
+		model.addObject("result", result);
+		return model;
 	}
 
-	@RequestMapping("deletetable")
-	public String deleteTableView() {
-		return "deletetable";
+	@RequestMapping("/cancelpurchase")
+	public String cancelPurchase(Map<String, Object> map) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		map.put("purchaseList", orderService.getAllUserOrders(user.getId()));
+		return "cancelpurchase";
 	}
 
-	@RequestMapping("deleteDataTable")
-	public ModelAndView deleteDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("deletetable");
-		deleteDataTable.dropDataTable(tableName);
-		modelandview.addObject("result", deleteDataTable.getResult());
-		return modelandview;
+	@RequestMapping("/cancelpurchase/{purchaseId}")
+	public String deleteUser(@PathVariable("purchaseId") Long purchaseId) {
+		orderService.removeOrder(purchaseId);
+		return "redirect:/cancelpurchase";
 	}
 
-	@RequestMapping("insertdata")
-	public ModelAndView insertDataView() {
-		ModelAndView modelandview = new ModelAndView("insertdata");
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		return modelandview;
+	@RequestMapping("/login")
+	public String loginPage() {
+		return "login";
 	}
 
-	@RequestMapping("insertdatatable")
-	public ModelAndView insertDataTable(@RequestParam(value = "tableTitleList") String tableName,
-			@RequestParam(value = "name") String name, @RequestParam(value = "amount") String amount) {
-		ModelAndView modelandview = new ModelAndView("insertdata");
-		insertDataTable.insertDataInTable(tableName, name, amount);
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		modelandview.addObject("result", insertDataTable.getResult());
-		return modelandview;
+	@RequestMapping("/reg")
+	public String regPage() {
+		return "registration";
 	}
 
-	@RequestMapping("selectdata")
-	public ModelAndView selectDataView() {
-		ModelAndView modelandview = new ModelAndView("selectdatatable");
-		return modelandview;
-	}
-
-	@RequestMapping("selectDataTable")
-	public ModelAndView selectDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("selectdatatable");
-		modelandview.addObject("list", selectDataTable.viewTable(tableName));
-		return modelandview;
-	}
-
-	@RequestMapping("/backupdb")
-	public ModelAndView backupDB() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", new BackupDB().backupResultOutput());
-		return modelandview;
-	}
-
-	@RequestMapping("describe")
-	public ModelAndView describeView() {
-		ModelAndView modelandview = new ModelAndView("describetable");
-		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
-		return modelandview;
-	}
-
-	@RequestMapping(value = "describeTable", method = RequestMethod.POST)
-	public ModelAndView describeTable(@RequestParam(value = "tablesInDB") String selectedTable) {
-		ModelAndView modelandview = new ModelAndView("describetable");
-		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
-		modelandview.addObject("listOfTableColumns", selectDataTable.getTableColumnName(selectedTable));
-		return modelandview;
-	}
-
-	@RequestMapping("/ShowTables")
-	public ModelAndView show() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.setViewName("ShowTables");
-		List<String> listTables = show.listTables();
-		modelandview.addObject("listTables", listTables);
-		modelandview.addObject("OptimizedTables", new ShowTableDB());
-		return modelandview;
-	}
-
-	//todo new
-	@RequestMapping("/ShrinkDataDB")
-	public ModelAndView shrinkDataDB(@ModelAttribute("OptimizedTables") ShowTableDB optimizedTables)
-			throws SQLException { //todo fix Exception
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		shrinkDataDB.setTablesToOptimize(optimizedTables.getTablesList());
-		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());
-		View view = new InternalResourceView("/WEB-INF/shrink.jsp");
-		modelandview.setView(view);
-		return modelandview;
+	@RequestMapping("/reguser")
+	public String regUser(@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password) {
+		try {
+			if (username != null & !username.equals("") & password != null & !password.equals("")) {
+				User user = new User(username, password);
+				accountService.addUser(user);
+			}
+		} catch (DataIntegrityViolationException e) {
+			return "redirect:/reg";
+		}
+		return "login";
 	}
 }

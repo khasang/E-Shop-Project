@@ -1,0 +1,33 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	<http>
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/css/**" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/reguser" access="permitAll" />
+		<intercept-url pattern="/reg" access="permitAll" />
+		<intercept-url pattern="/install" access="permitAll" />
+		<intercept-url pattern="/**"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<form-login login-page="/login" default-target-url="/" />
+		<logout logout-success-url="/" logout-url="/logout" />
+		<csrf disabled="true" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="securityService">
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<beans:property name="driver" ref="driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/eshop" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="root" />
+	</beans:bean>
+	<beans:bean id="driver" class="com.mysql.jdbc.Driver" />
+</beans:beans>

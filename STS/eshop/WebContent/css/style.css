@@ -52,6 +52,7 @@ h1 {
 	margin: 0 auto;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
+	text-decoration: none;
 }
 
 .menu_left {
