@@ -1,31 +1,9 @@
-<<<<<<< HEAD
-/e_shop - копия/
-/E-Shop-Project-acherbaevsql/
-/E-Shop-Project-AGalochkin1/
-/demo1/
-/build/
-/agalochkin/
+/eshop1/
+/RemoteSystemsTempFiles/
+/Servers/
+/Tomcat v7.0 Server at localhost-config/
 /.settings/
 /.recommenders/
 /.metadata/
-/eshop - копия/
-/gs-validating-form-input-master/
-/InternetShop/
-/JdbcTest-master/
-/LightTraffic/
-/RemoteSystemsTempFiles/
-/Servers/
-/SQL/
-/SQL1/
-/src/
-/temp01/
-/tmp/
-/WebContent/
-=======
-/E_Shop — копия/
-/RemoteSystemTempFiles/
->>>>>>> APestov
-/Tomcat v7.0 Server at localhost-config/
-*.project
 *.classpath
-/eshop1/
+*.project
