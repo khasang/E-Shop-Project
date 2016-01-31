@@ -1,1 +1,0 @@
-<div class="header"><a href="<%=request.getContextPath()%>/" class="header">E-Shop project</a></div>

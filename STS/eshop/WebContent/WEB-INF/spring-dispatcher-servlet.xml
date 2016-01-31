@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:component-scan base-package="com.eshop.controller" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="backupDB" class="com.eshop.model.BackupDB" />
+
+	<bean id="createDataTable" class="com.eshop.model.CreateDataTable">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="deleteDataTable" class="com.eshop.model.DeleteDataTable">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="selectDataTable" class="com.eshop.model.SelectDataTable">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="shrink" class="com.eshop.model.ShrinkDataDB">
+		<constructor-arg ref="jdbcTemplate" /> 
+	</bean>
+
+	<bean id="insertDataTable" class="com.eshop.model.InsertDataTable">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+	
+	<bean id="ShowTableDB" class="com.eshop.model.ShowTableDB">
+		<constructor-arg ref="jdbcTemplate" />
+	</bean>
+		
+
+	<bean id="passwordValidator" class="com.eshop.service.PasswordValidator" />	
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+			
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driver" ref="driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/eshop" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+		
+    <bean class="org.springframework.data.web.config.SpringDataWebConfiguration"/>
+    
+</beans>

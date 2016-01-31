@@ -1,107 +1,58 @@
 package com.eshop.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @Entity
-@Table(name = "users")
-public class User implements UserDetails {
-	private static final long serialVersionUID = -930110079518261599L;
+@Table(name = "USERS")
+public class User {
+
+	@Column(name = "NAME")
+	private String name;
+
+	@Column(name = "EMAIL")
+	private String email;
+
 	@Id
-	@GeneratedValue
-	@Column(name = "user_id", insertable = false, updatable = false, nullable = false)
-	private long id;
-	@Column(name = "username", unique = true, nullable = false)
-	private String username;
-	@Column(name = "enabled")
-	private int enabled = 1;
-	@Column(name = "password")
+	@Column(name = "LOGIN", unique = true)
+	private String login;
+
+	@Column(name = "PASSWORD")
 	private String password;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Order> userOrderList = new ArrayList<>();
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id") , inverseJoinColumns = @JoinColumn(name = "role_id") )
-	private Set<UserRole> userRoles = new HashSet<>();
+
+	@Transient
+	private String confirmPassword;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ROLE")
+	private UserRoles role = UserRoles.ROLE_USER;
 
 	public User() {
-		super();
 	}
 
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
+	public String getName() {
+		return name;
 	}
 
-	public User(String username, String password, int enabled) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public User(String username, String password, int enabled, UserRole userRole) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		userRoles.add(userRole);
+	public String getEmail() {
+		return email;
 	}
 
-	public int getEnabled() {
-		return enabled;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
+	public String getLogin() {
+		return login;
 	}
 
-	public List<Order> getUserOrderList() {
-		return userOrderList;
-	}
-
-	public void setUserOrderList(List<Order> userOrderList) {
-		this.userOrderList = userOrderList;
-	}
-
-	public void addRole() {
-		UserRole userRole = new UserRole();
-		userRole.setListRole(ListRole.ROLE_USER);
-		userRoles.add(userRole);
-	}
-
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getPassword() {
@@ -112,32 +63,27 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<SimpleGrantedAuthority> result = new ArrayList<>();
-		for (UserRole userRole : userRoles) {
-			result.add(new SimpleGrantedAuthority(userRole.getListRole().name()));
-		}
-		return result;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
+	public UserRoles getRole() {
+		return role;
 	}
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
+	public void setRole(UserRoles role) {
+		this.role = role;
+	}
+	
+	public List<UserRoles> getRolesValues(){			
+		return Arrays.asList(UserRoles.values());
 	}
 
-	@Override
-	public boolean isEnabled() {
-		return true;
+	public String toString() {
+		return "name=" + name + ",email=" + email + ",login=" + login + ",password=" + password;
 	}
 }
