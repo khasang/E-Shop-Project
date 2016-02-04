@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eshop.model.User;
+import com.eshop.entity.User;
 import com.eshop.model.UserRoles;
 
 public interface UserRepository extends CrudRepository<User, String> {

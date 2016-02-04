@@ -1,8 +1,10 @@
-package com.eshop.model;
+package com.eshop.entity;
 
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.*;
+
+import com.eshop.model.UserRoles;
 
 @Entity
 @Table(name = "USERS")
@@ -85,5 +87,5 @@ public class User {
 
 	public String toString() {
 		return "name=" + name + ",email=" + email + ",login=" + login + ",password=" + password;
-	}
+	}	
 }
