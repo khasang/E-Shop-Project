@@ -9,7 +9,6 @@ import com.eshop.model.UserRoles;
 @Entity
 @Table(name = "USERS")
 public class User {
-	
 	@Id
 	@GeneratedValue
 	private int id;
@@ -20,7 +19,6 @@ public class User {
 	@Column(name = "EMAIL")
 	private String email;
 
-	
 	@Column(name = "LOGIN", unique = true)
 	private String login;
 
@@ -36,7 +34,7 @@ public class User {
 
 	public User() {
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -92,12 +90,12 @@ public class User {
 	public void setRole(UserRoles role) {
 		this.role = role;
 	}
-	
-	public List<UserRoles> getRolesValues(){			
+
+	public List<UserRoles> getRolesValues() {
 		return Arrays.asList(UserRoles.values());
 	}
 
 	public String toString() {
 		return "name=" + name + ",email=" + email + ",login=" + login + ",password=" + password;
-	}	
+	}
 }

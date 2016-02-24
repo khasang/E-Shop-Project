@@ -8,8 +8,8 @@ public class Status {
 	@Id
 	@GeneratedValue
 	private int id;
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String name;
 
 	public int getId() {
@@ -26,5 +26,5 @@ public class Status {
 
 	public void setName(String name) {
 		this.name = name;
-	}			
+	}
 }

@@ -1,9 +1,9 @@
 package com.eshop.controller;
+
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.eshop.entity.User;
 import com.eshop.model.*;
 import com.eshop.repository.*;
@@ -52,7 +51,7 @@ public class AppController {
 		modelandview.setViewName("registration");
 		return modelandview;
 	}
-	
+
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
@@ -66,7 +65,7 @@ public class AppController {
 		passwordValidator.validate(newUser, result);
 		if (!result.hasErrors()) {
 			try {
-				userRepository.save(newUser);				
+				userRepository.save(newUser);
 				modelandview.addObject("result", "User " + newUser.getLogin() + " successfully added");
 			} catch (DataIntegrityViolationException e) {
 				result.reject("user.exists", "User already exists");
@@ -75,16 +74,16 @@ public class AppController {
 		modelandview.setViewName("registration");
 		return modelandview;
 	}
-	
+
 	@RequestMapping("basket")
-	public ModelAndView viewBasket(Principal principal){
+	public ModelAndView viewBasket(Principal principal) {
 		ModelAndView modelandview = new ModelAndView("basket");
-		String login = principal.getName();		 
-	    User user = userRepository.findByLogin(login);
+		String login = principal.getName();
+		User user = userRepository.findByLogin(login);
 		modelandview.addObject("listBasket", basketRepository.findByUser(user));
 		return modelandview;
 	}
-	
+
 	@RequestMapping("orderslist")
 	public ModelAndView orderListView() {
 		ModelAndView modelandview = new ModelAndView("orders");
@@ -110,7 +109,7 @@ public class AppController {
 		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
 		return modelandview;
 	}
-	
+
 	@RequestMapping("createtable")
 	public String createTableView() {
 		return "createtable";
@@ -182,10 +181,10 @@ public class AppController {
 	@RequestMapping("/admin/updateRole")
 	public String updaterole(@ModelAttribute("User") User user) {
 		System.out.println("login =");
-		 userRepository.setRole(user.getLogin(), user.getRole());
-	     return "redirect:/admin/manageusers";
-	}	
-	
+		userRepository.setRole(user.getLogin(), user.getRole());
+		return "redirect:/admin/manageusers";
+	}
+
 	@RequestMapping("/admin/backup")
 	public ModelAndView backupDBView() {
 		ModelAndView modelandview = new ModelAndView("backup");
@@ -232,5 +231,5 @@ public class AppController {
 		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());
 		modelandview.setViewName("shrink");
 		return modelandview;
-	}		
+	}
 }

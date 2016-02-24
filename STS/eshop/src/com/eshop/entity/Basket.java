@@ -12,7 +12,7 @@ public class Basket {
 	private int id;
 
 	@OneToOne
-	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK"))
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK") )
 	private Product product;
 
 	@Column(name = "CNT")
@@ -22,11 +22,11 @@ public class Basket {
 	private int priceTotal;
 
 	@OneToOne
-	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK"))
+	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK") )
 	private User user;
 
 	@OneToOne
-	@JoinColumn(name = "STATUS_ID", foreignKey = @ForeignKey(name = "STATUS_FK"))
+	@JoinColumn(name = "STATUS_ID", foreignKey = @ForeignKey(name = "STATUS_FK") )
 	private Status status;
 
 	public int getId() {
@@ -36,7 +36,7 @@ public class Basket {
 	public void setId(int id) {
 		this.id = id;
 	}
-   
+
 	public Product getProduct() {
 		return product;
 	}
@@ -76,6 +76,4 @@ public class Basket {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-    
-	
 }
