@@ -14,15 +14,17 @@
 <%@ include file="leftMenu.jsp"%>
 <div class="content" align="center">
 ${username}
-<table border>
+<table border=1>
 <tr>
 <th>Product name</th>
+<th>Price</th>
 <th>Count</th>
 <th>Price total</th>
 </tr>
 <c:forEach var="basket" items="${listBasket}">
 <tr>
 <td>${basket.product.name}</td>
+<td>${basket.product.price}</td>
 <td>${basket.count}</td>
 <td>${basket.priceTotal}</td>
 </tr>
