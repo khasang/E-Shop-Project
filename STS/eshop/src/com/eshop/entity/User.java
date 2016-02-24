@@ -9,6 +9,10 @@ import com.eshop.model.UserRoles;
 @Entity
 @Table(name = "USERS")
 public class User {
+	
+	@Id
+	@GeneratedValue
+	private int id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -16,7 +20,7 @@ public class User {
 	@Column(name = "EMAIL")
 	private String email;
 
-	@Id
+	
 	@Column(name = "LOGIN", unique = true)
 	private String login;
 
@@ -31,6 +35,14 @@ public class User {
 	private UserRoles role = UserRoles.ROLE_USER;
 
 	public User() {
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -1,76 +1,81 @@
 package com.eshop.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
-@Table(name="BASKET")
+@Table(name = "BASKET")
 public class Basket {
-@Id
-@GeneratedValue
-private int id;
+	@Id
+	@GeneratedValue
+	private int id;
 
-@Column(name="PRODUCT_ID")
-private int productId;
+	@OneToOne
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK"))
+	private Product product;
 
-@Column(name="COUNT")
-private int count;
+	@Column(name = "CNT")
+	private int count;
 
-@Column(name="PRICE_TOTAL")
-private BigDecimal priceTotal;
+	@Formula("(select p.price*b.cnt from Basket b, Product p where p.id = b.product_id and p.id = product_id)")
+	private int priceTotal;
 
-@Column(name="USER_ID")
-private int userId;
+	@OneToOne
+	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK"))
+	private User user;
 
-@Column(name="status")
-private int status;
+	@OneToOne
+	@JoinColumn(name = "STATUS_ID", foreignKey = @ForeignKey(name = "STATUS_FK"))
+	private Status status;
 
-public int getId() {
-	return id;
-}
+	public int getId() {
+		return id;
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
+   
+	public Product getProduct() {
+		return product;
+	}
 
-public int getProductId() {
-	return productId;
-}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-public void setProductId(int productId) {
-	this.productId = productId;
-}
+	public int getCount() {
+		return count;
+	}
 
-public int getCount() {
-	return count;
-}
+	public void setCount(int count) {
+		this.count = count;
+	}
 
-public void setCount(int count) {
-	this.count = count;
-}
+	public int getPriceTotal() {
+		return priceTotal;
+	}
 
-public BigDecimal getPriceTotal() {
-	return priceTotal;
-}
+	public void setPriceTotal(int priceTotal) {
+		this.priceTotal = priceTotal;
+	}
 
-public void setPriceTotal(BigDecimal priceTotal) {
-	this.priceTotal = priceTotal;
-}
+	public User getUser() {
+		return user;
+	}
 
-public int getUserId() {
-	return userId;
-}
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-public void setUserId(int userId) {
-	this.userId = userId;
-}
+	public Status getStatus() {
+		return status;
+	}
 
-public int getStatus() {
-	return status;
-}
-
-public void setStatus(int status) {
-	this.status = status;
-}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+    
+	
 }

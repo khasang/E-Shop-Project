@@ -1,7 +1,9 @@
 package com.eshop.controller;
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eshop.entity.User;
 import com.eshop.model.*;
-import com.eshop.repository.UserRepository;
+import com.eshop.repository.*;
 import com.eshop.service.PasswordValidator;
 
 @Controller
@@ -35,6 +37,8 @@ public class AppController {
 	PasswordValidator passwordValidator;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	BasketRepository basketRepository;
 
 	@RequestMapping("login")
 	public String login() {
@@ -46,6 +50,13 @@ public class AppController {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("User", new User());
 		modelandview.setViewName("registration");
+		return modelandview;
+	}
+	
+	@RequestMapping("/")
+	public ModelAndView inputForm() {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		modelandview.addObject("result", "Welcome to our Eshop project!");
 		return modelandview;
 	}
 
@@ -64,24 +75,16 @@ public class AppController {
 		modelandview.setViewName("registration");
 		return modelandview;
 	}
-
-	@RequestMapping("/admin/manageusers")
-	public ModelAndView manageusers() {
-		ModelAndView modelandview = new ModelAndView("manageusers");
-		User user = new User();
-		modelandview.addObject("User", user);
-		modelandview.addObject("listUserRoles", user.getRolesValues());
-		modelandview.addObject("listUsers", userRepository.findAll());
+	
+	@RequestMapping("basket")
+	public ModelAndView viewBasket(Principal principal){
+		ModelAndView modelandview = new ModelAndView("basket");
+		String login = principal.getName();		 
+	    User user = userRepository.findByLogin(login);
+		modelandview.addObject("listBasket", basketRepository.findByUser(user));
 		return modelandview;
 	}
-
-	@RequestMapping("/admin/updateRole")
-	public String updaterole(@ModelAttribute("User") User user) {
-		System.out.println("login =");
-		 userRepository.setRole(user.getLogin(), user.getRole());
-	     return "redirect:/admin/manageusers";
-	}
-
+	
 	@RequestMapping("orderslist")
 	public ModelAndView orderListView() {
 		ModelAndView modelandview = new ModelAndView("orders");
@@ -107,14 +110,7 @@ public class AppController {
 		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
 		return modelandview;
 	}
-
-	@RequestMapping("/")
-	public ModelAndView inputForm() {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", "Welcome to our Eshop project!");
-		return modelandview;
-	}
-
+	
 	@RequestMapping("createtable")
 	public String createTableView() {
 		return "createtable";
@@ -173,6 +169,23 @@ public class AppController {
 		return modelandview;
 	}
 
+	@RequestMapping("/admin/manageusers")
+	public ModelAndView manageusers() {
+		ModelAndView modelandview = new ModelAndView("manageusers");
+		User user = new User();
+		modelandview.addObject("User", user);
+		modelandview.addObject("listUserRoles", user.getRolesValues());
+		modelandview.addObject("listUsers", userRepository.findAll());
+		return modelandview;
+	}
+
+	@RequestMapping("/admin/updateRole")
+	public String updaterole(@ModelAttribute("User") User user) {
+		System.out.println("login =");
+		 userRepository.setRole(user.getLogin(), user.getRole());
+	     return "redirect:/admin/manageusers";
+	}	
+	
 	@RequestMapping("/admin/backup")
 	public ModelAndView backupDBView() {
 		ModelAndView modelandview = new ModelAndView("backup");
@@ -219,5 +232,5 @@ public class AppController {
 		modelandview.addObject("listTables", shrinkDataDB.optimizeTables());
 		modelandview.setViewName("shrink");
 		return modelandview;
-	}
+	}		
 }
