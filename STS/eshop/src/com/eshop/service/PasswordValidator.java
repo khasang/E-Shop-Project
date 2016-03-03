@@ -3,7 +3,8 @@ package com.eshop.service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import com.eshop.model.User;
+
+import com.eshop.entity.User;
 
 public class PasswordValidator implements Validator {
 
