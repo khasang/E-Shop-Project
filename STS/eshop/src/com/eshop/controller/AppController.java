@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.eshop.entity.User;
@@ -18,14 +17,7 @@ import com.eshop.service.PasswordValidator;
 
 @Controller
 public class AppController {
-	@Autowired
-	InsertDataTable insertDataTable;
-	@Autowired
-	CreateDataTable createDataTable;
-	@Autowired
-	DeleteDataTable deleteDataTable;
-	@Autowired
-	SelectDataTable selectDataTable;
+
 	@Autowired
 	ShrinkDataDB shrinkDataDB;
 	@Autowired
@@ -39,6 +31,9 @@ public class AppController {
 	@Autowired
 	BasketRepository basketRepository;
 
+	
+	
+	
 	@RequestMapping("login")
 	public String login() {
 		return "login";
@@ -59,6 +54,16 @@ public class AppController {
 		return modelandview;
 	}
 
+
+	@RequestMapping("basket")
+	public ModelAndView viewBasket(Principal principal) {
+		ModelAndView modelandview = new ModelAndView("basket");
+		String login = principal.getName();
+		User user = userRepository.findByLogin(login);
+		modelandview.addObject("listBasket", basketRepository.findByUser(user));
+		return modelandview;
+	}
+	
 	@RequestMapping("adduser")
 	public ModelAndView registerUser(@ModelAttribute("User") User newUser, BindingResult result) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
@@ -75,98 +80,6 @@ public class AppController {
 		return modelandview;
 	}
 
-	@RequestMapping("basket")
-	public ModelAndView viewBasket(Principal principal) {
-		ModelAndView modelandview = new ModelAndView("basket");
-		String login = principal.getName();
-		User user = userRepository.findByLogin(login);
-		modelandview.addObject("listBasket", basketRepository.findByUser(user));
-		return modelandview;
-	}
-
-	@RequestMapping("orderslist")
-	public ModelAndView orderListView() {
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
-	}
-
-	@RequestMapping(value = "deleteOrder", method = RequestMethod.POST)
-	public ModelAndView orderListDeleteItem(@RequestParam(value = "orderName") String selectedOrderId) {
-		deleteDataTable.deleteDataFromTable(selectedOrderId);
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
-	}
-
-	@RequestMapping(value = "insertOrder", method = RequestMethod.POST)
-	public ModelAndView orderListAddOrder(@RequestParam(value = "orderName") String orderName) {
-		insertDataTable.insertDataInTable(orderName);
-		ModelAndView modelandview = new ModelAndView("orders");
-		modelandview.addObject("list", selectDataTable.viewTable("product"));
-		modelandview.addObject("tableTitleList", selectDataTable.getTableColumnName("product"));
-		return modelandview;
-	}
-
-	@RequestMapping("createtable")
-	public String createTableView() {
-		return "createtable";
-	}
-
-	@RequestMapping("createDataTable")
-	public ModelAndView createDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("createtable");
-		createDataTable.createDataTable(tableName);
-		modelandview.addObject("result", createDataTable.getResult());
-		return modelandview;
-	}
-
-	@RequestMapping("deletetable")
-	public String deleteTableView() {
-		return "deletetable";
-	}
-
-	@RequestMapping("deleteDataTable")
-	public ModelAndView deleteDataTable(@RequestParam(value = "tableName") String tableName) {
-		ModelAndView modelandview = new ModelAndView("deletetable");
-		deleteDataTable.dropDataTable(tableName);
-		modelandview.addObject("result", deleteDataTable.getResult());
-		return modelandview;
-	}
-
-	@RequestMapping("insertdata")
-	public ModelAndView insertDataView() {
-		ModelAndView modelandview = new ModelAndView("insertdata");
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		return modelandview;
-	}
-
-	@RequestMapping("insertdatatable")
-	public ModelAndView insertDataTable(@RequestParam(value = "tableTitleList") String tableName,
-			@RequestParam(value = "name") String name, @RequestParam(value = "amount") String amount) {
-		ModelAndView modelandview = new ModelAndView("insertdata");
-		insertDataTable.insertDataInTable(tableName, name, amount);
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		modelandview.addObject("result", insertDataTable.getResult());
-		return modelandview;
-	}
-
-	@RequestMapping("selectdata")
-	public ModelAndView selectDataView() {
-		ModelAndView modelandview = new ModelAndView("selectdatatable");
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		return modelandview;
-	}
-
-	@RequestMapping("selectDataTable")
-	public ModelAndView selectDataTable(@RequestParam(value = "tableTitleList") String tableName) {
-		ModelAndView modelandview = new ModelAndView("selectdatatable");
-		modelandview.addObject("tableTitleList", selectDataTable.dataBaseAllTableName());
-		modelandview.addObject("list", selectDataTable.viewTable(tableName));
-		return modelandview;
-	}
 
 	@RequestMapping("/admin/manageusers")
 	public ModelAndView manageusers() {
@@ -196,21 +109,6 @@ public class AppController {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		backup.setPath(path);
 		modelandview.addObject("result", backup.backupResultOutput());
-		return modelandview;
-	}
-
-	@RequestMapping("/admin/describe")
-	public ModelAndView describeView() {
-		ModelAndView modelandview = new ModelAndView("describetable");
-		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
-		return modelandview;
-	}
-
-	@RequestMapping(value = "/admin/describeTable", method = RequestMethod.POST)
-	public ModelAndView describeTable(@RequestParam(value = "tablesInDB") String selectedTable) {
-		ModelAndView modelandview = new ModelAndView("describetable");
-		modelandview.addObject("tablesInDB", selectDataTable.dataBaseAllTableName());
-		modelandview.addObject("listOfTableColumns", selectDataTable.getTableColumnName(selectedTable));
 		return modelandview;
 	}
 

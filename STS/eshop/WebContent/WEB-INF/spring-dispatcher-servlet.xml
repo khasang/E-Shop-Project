@@ -23,26 +23,10 @@
 
 	<bean id="backupDB" class="com.eshop.model.BackupDB" />
 
-	<bean id="createDataTable" class="com.eshop.model.CreateDataTable">
-		<constructor-arg ref="jdbcTemplate" />
-	</bean>
-
-	<bean id="deleteDataTable" class="com.eshop.model.DeleteDataTable">
-		<constructor-arg ref="jdbcTemplate" />
-	</bean>
-
-	<bean id="selectDataTable" class="com.eshop.model.SelectDataTable">
-		<constructor-arg ref="jdbcTemplate" />
-	</bean>
-
 	<bean id="shrink" class="com.eshop.model.ShrinkDataDB">
 		<constructor-arg ref="jdbcTemplate" /> 
 	</bean>
 
-	<bean id="insertDataTable" class="com.eshop.model.InsertDataTable">
-		<constructor-arg ref="jdbcTemplate" />
-	</bean>
-	
 	<bean id="ShowTableDB" class="com.eshop.model.ShowTableDB">
 		<constructor-arg ref="jdbcTemplate" />
 	</bean>

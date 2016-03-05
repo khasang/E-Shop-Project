@@ -8,14 +8,9 @@
 </form>    
 <div class="menu_left" align="center">
 	<ol>
-		<li><a href="${eshopurl}/createtable">New Purchase</a></li>
-		<li><a href="${eshopurl}/deletetable">Cancel Purchase</a></li>
-		<li><a href="${eshopurl}/insertdata">Create Order</a></li>
-		<li><a href="${eshopurl}/selectdata">View Order</a></li>	
 		<li><a href="${eshopurl}/basket">View Basket</a></li>				
 		<security:authorize access="hasRole('ROLE_ADMIN')">
         <li><a href="${eshopurl}/admin/manageusers">Manage users</a></li> 			
-		<li><a href="${eshopurl}/admin/describe">Describe Table Info Columns</a></li>
 		<li><a href="${eshopurl}/admin/backup">Backup DB</a></li>
 		<li><a href="${eshopurl}/admin/showtables">Shrink Data DB</a></li>
 		</security:authorize>		    
