@@ -30,9 +30,6 @@ public class AppController {
 	UserRepository userRepository;
 	@Autowired
 	BasketRepository basketRepository;
-
-	
-	
 	
 	@RequestMapping("login")
 	public String login() {
@@ -53,7 +50,6 @@ public class AppController {
 		modelandview.addObject("result", "Welcome to our Eshop project!");
 		return modelandview;
 	}
-
 
 	@RequestMapping("basket")
 	public ModelAndView viewBasket(Principal principal) {
@@ -79,7 +75,6 @@ public class AppController {
 		modelandview.setViewName("registration");
 		return modelandview;
 	}
-
 
 	@RequestMapping("/admin/manageusers")
 	public ModelAndView manageusers() {
