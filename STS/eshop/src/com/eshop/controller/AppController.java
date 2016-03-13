@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.eshop.entity.Basket;
+import com.eshop.entity.LogOrders;
 import com.eshop.entity.User;
 import com.eshop.model.*;
 import com.eshop.repository.*;
@@ -17,7 +20,6 @@ import com.eshop.service.PasswordValidator;
 
 @Controller
 public class AppController {
-
 	@Autowired
 	ShrinkDataDB shrinkDataDB;
 	@Autowired
@@ -30,10 +32,9 @@ public class AppController {
 	UserRepository userRepository;
 	@Autowired
 	BasketRepository basketRepository;
+	@Autowired
+	LogOrdersRepository logOrdersRepository;
 
-	
-	
-	
 	@RequestMapping("login")
 	public String login() {
 		return "login";
@@ -54,7 +55,6 @@ public class AppController {
 		return modelandview;
 	}
 
-
 	@RequestMapping("basket")
 	public ModelAndView viewBasket(Principal principal) {
 		ModelAndView modelandview = new ModelAndView("basket");
@@ -63,7 +63,7 @@ public class AppController {
 		modelandview.addObject("listBasket", basketRepository.findByUser(user));
 		return modelandview;
 	}
-	
+
 	@RequestMapping("adduser")
 	public ModelAndView registerUser(@ModelAttribute("User") User newUser, BindingResult result) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
@@ -80,6 +80,20 @@ public class AppController {
 		return modelandview;
 	}
 
+	@RequestMapping("addOrderInLog")
+	public ModelAndView addOrderInLog(@ModelAttribute("Basket") Basket basket, BindingResult result) {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		LogOrders logOrders = new LogOrders(basket);
+		if (!result.hasErrors()) {
+			try {
+				logOrdersRepository.save(logOrders);
+			} catch (DataIntegrityViolationException e) {
+				result.reject("user.exists", "User already exists");
+			}
+		}
+		modelandview.addObject("result", "The order has been paid");
+		return modelandview;
+	}
 
 	@RequestMapping("/admin/manageusers")
 	public ModelAndView manageusers() {
