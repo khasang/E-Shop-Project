@@ -1,12 +1,11 @@
 package com.eshop.entity;
 
 import javax.persistence.*;
-
 import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name = "BASKET")
-public class Basket {
+public class Basket {	
 	@Id
 	@GeneratedValue
 	private int id;

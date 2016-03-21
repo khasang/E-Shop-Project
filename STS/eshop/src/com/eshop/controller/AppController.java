@@ -88,7 +88,6 @@ public class AppController {
 
 	@RequestMapping("/admin/updateRole")
 	public String updaterole(@ModelAttribute("User") User user) {
-		System.out.println("login =");
 		userRepository.setRole(user.getLogin(), user.getRole());
 		return "redirect:/admin/manageusers";
 	}
