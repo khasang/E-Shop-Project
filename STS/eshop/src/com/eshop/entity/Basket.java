@@ -1,5 +1,8 @@
 package com.eshop.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.Formula;
@@ -10,11 +13,14 @@ public class Basket {
 	@Id
 	@GeneratedValue
 	private int id;
-
+	
 	@OneToOne
-	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK") )
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK"))
 	private Product product;
-
+	
+	@OneToMany(mappedBy="basket", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<LogOrders> logOrders = new ArrayList<>();
+	
 	@Column(name = "CNT")
 	private int count;
 
@@ -24,10 +30,6 @@ public class Basket {
 	@OneToOne
 	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK") )
 	private User user;
-
-	@OneToOne
-	@JoinColumn(name = "STATUS_ID", foreignKey = @ForeignKey(name = "STATUS_FK") )
-	private Status status;
 
 	public int getId() {
 		return id;
@@ -43,6 +45,14 @@ public class Basket {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public List<LogOrders> getLogOrders() {
+		return logOrders;
+	}
+
+	public void setLogOrders(List<LogOrders> logOrders) {
+		this.logOrders = logOrders;
 	}
 
 	public int getCount() {
@@ -67,13 +77,5 @@ public class Basket {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 }

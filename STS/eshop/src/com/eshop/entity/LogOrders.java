@@ -1,20 +1,15 @@
 package com.eshop.entity;
 
-import java.util.Calendar;
 import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.eshop.model.OrderStatus;
 
 @Entity
 @Table(name = "LOG_ORDERS")
@@ -23,33 +18,30 @@ public class LogOrders {
 	@GeneratedValue
 	private int id;
 
-	@OneToOne
-	@JoinColumn(name = "BASKET_ID", foreignKey = @ForeignKey(name = "BASKET_ID_FK") )
-	private Basket basketId;
+	@ManyToOne
+    @JoinColumn(name="basket_id", foreignKey = @ForeignKey(name = "BASKET_FK"))  	
+	private Basket basket;
 
-	@Column(name = "DATE")
+	@Column(name = "DATE", columnDefinition = "DATETIME DEFAULT NOW", insertable=false)
 	private Timestamp timestamp;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "STATUS")
-	private OrderStatus status;
+	@OneToOne
+	@JoinColumn(name = "STATUS", foreignKey = @ForeignKey(name = "STATUS_FK"))
+	private Status status;
 
-	public LogOrders(Basket basket) {
-		basketId = basket;
-		status = OrderStatus.PAID;
-		timestamp = new Timestamp(Calendar.getInstance().getTime().getTime());
+	public LogOrders() {
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public Basket getBasketId() {
-		return basketId;
+	public Basket getBasket() {
+		return basket;
 	}
 
-	public void setBasketId(Basket basketId) {
-		this.basketId = basketId;
+	public void setBasket(Basket basket) {
+		this.basket = basket;
 	}
 
 	public Timestamp getTimestamp() {
@@ -60,11 +52,11 @@ public class LogOrders {
 		this.timestamp = timestamp;
 	}
 
-	public OrderStatus getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 }

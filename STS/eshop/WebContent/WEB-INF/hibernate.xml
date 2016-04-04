@@ -51,10 +51,6 @@
         </property>
         <property name="jpaProperties">
             <value>
-                hibernate.cache.use_second_level_cache = true
-                hibernate.cache.region.factory_class = org.hibernate.cache.ehcache.EhCacheRegionFactory
-                hibernate.cache.use_query_cache = true
-                hibernate.generate_statistics = true
                 hibernate.dynamic_update = true
             </value>
         </property>

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eshop.entity.Basket;
-import com.eshop.entity.LogOrders;
-import com.eshop.entity.User;
+import com.eshop.entity.*;
 import com.eshop.model.*;
 import com.eshop.repository.*;
 import com.eshop.service.PasswordValidator;
@@ -83,14 +81,12 @@ public class AppController {
 	@RequestMapping("addOrderInLog")
 	public ModelAndView addOrderInLog(@ModelAttribute("Basket") Basket basket, BindingResult result) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		LogOrders logOrders = new LogOrders(basket);
-		if (!result.hasErrors()) {
-			try {
-				logOrdersRepository.save(logOrders);
-			} catch (DataIntegrityViolationException e) {
-				result.reject("user.exists", "User already exists");
-			}
-		}
+		LogOrders logOrders = new LogOrders();
+		Status status = new Status();
+		status.setStatusCode(OrderStatus.PAID);		
+		logOrders.setStatus(status);
+		logOrders.setBasket(basket);
+	    logOrdersRepository.save(logOrders);
 		modelandview.addObject("result", "The order has been paid");
 		return modelandview;
 	}
@@ -107,7 +103,6 @@ public class AppController {
 
 	@RequestMapping("/admin/updateRole")
 	public String updaterole(@ModelAttribute("User") User user) {
-		System.out.println("login =");
 		userRepository.setRole(user.getLogin(), user.getRole());
 		return "redirect:/admin/manageusers";
 	}

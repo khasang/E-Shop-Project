@@ -35,6 +35,9 @@
       </plugin>
     </plugins>
   </build>
+  <properties>
+  	<spring.version>4.2.4.RELEASE</spring.version>
+  </properties>
   <dependencies>
   	<dependency>
   		<groupId>org.springframework</groupId>
@@ -165,6 +168,11 @@
   		<groupId>org.springframework.data</groupId>
   		<artifactId>spring-data-commons-core</artifactId>
   		<version>1.4.1.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>4.2.4.RELEASE</version>
   	</dependency>
   </dependencies>
 </project>

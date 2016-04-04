@@ -2,22 +2,26 @@ package com.eshop.entity;
 
 import javax.persistence.*;
 
+import com.eshop.model.OrderStatus;
+
 @Entity
 @Table(name = "STATUS")
 public class Status {
-	@Id
-	@GeneratedValue
-	private int id;
 
+	@Id
+	@Enumerated(EnumType.STRING)
+	@Column(name = "STATUS_CODE")
+	private OrderStatus statusCode;
+	
 	@Column(name = "NAME")
 	private String name;
-
-	public int getId() {
-		return id;
+	
+	public OrderStatus getStatusCode() {
+		return statusCode;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setStatusCode(OrderStatus statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	public String getName() {
