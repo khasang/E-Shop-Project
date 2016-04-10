@@ -24,10 +24,6 @@ public class Basket {
 	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK") )
 	private User user;
 
-	@OneToOne
-	@JoinColumn(name = "STATUS_ID", foreignKey = @ForeignKey(name = "STATUS_FK") )
-	private Status status;
-
 	public int getId() {
 		return id;
 	}
@@ -66,13 +62,5 @@ public class Basket {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 }
