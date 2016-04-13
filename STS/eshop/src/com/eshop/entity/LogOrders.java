@@ -1,6 +1,7 @@
 package com.eshop.entity;
 
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -8,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,10 +22,10 @@ public class LogOrders {
     @JoinColumn(name="basket_id", foreignKey = @ForeignKey(name = "BASKET_FK"))  	
 	private Basket basket;
 
-	@Column(name = "DATE", columnDefinition = "DATETIME DEFAULT NOW", insertable=false)
+	@Column(name = "DATE", columnDefinition = "DATETIME DEFAULT NOW()", insertable=false)
 	private Timestamp timestamp;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "STATUS", foreignKey = @ForeignKey(name = "STATUS_FK"))
 	private Status status;
 

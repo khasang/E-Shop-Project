@@ -14,29 +14,27 @@
 <div class="container">
 <%@ include file="leftMenu.jsp"%>
 <div class="content" align="center">
-${username}
+${result}
+<form:form action="processorder" modelAttribute="listOrders"> 
+
 <table border=1>
 	<tr>
 		<th>Product name</th>
 		<th>Price</th>
 		<th>Count</th>
 		<th>Price total</th>
-	</tr>
+	</tr>	
 	<c:forEach var="basket" items="${listBasket}">
 		<tr>
 			<td>${basket.product.name}</td>
 			<td>${basket.product.price}</td>
 			<td>${basket.count}</td>
-			<td>${basket.priceTotal}</td>
-			<td>
-				<form:form action="addOrderInLog" modelAttribute="Basket"> 
-					<input type="hidden" name="id" value="${basket.id}"/>
-					<input type="submit" value="Buy">
-				</form:form>
-			</td>
+			<td>${basket.priceTotal}</td>		
+			<td><a href="deleteorder/${basket.id}">Delete</a></td>
 		</tr>
 	</c:forEach>
 </table>
+</form:form>
 </div>
 </div>
 

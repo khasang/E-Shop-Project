@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,9 +60,18 @@ public class AppController {
 		String login = principal.getName();
 		User user = userRepository.findByLogin(login);
 		modelandview.addObject("listBasket", basketRepository.findByUser(user));
+        modelandview.addObject("listOrders", new Orders());	    
 		return modelandview;
 	}
-
+	
+	@RequestMapping(value="deleteorder/{orderId}")
+	public String deleteOrder(@PathVariable("orderId") int orderId){
+	    Basket basket = new Basket();
+	    basket.setId(orderId);
+	    basketRepository.delete(basket);
+        return "redirect:/basket";
+	}
+	
 	@RequestMapping("adduser")
 	public ModelAndView registerUser(@ModelAttribute("User") User newUser, BindingResult result) {
 		ModelAndView modelandview = new ModelAndView("E-Shop");

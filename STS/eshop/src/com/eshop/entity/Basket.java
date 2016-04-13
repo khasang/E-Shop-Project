@@ -14,7 +14,7 @@ public class Basket {
 	@GeneratedValue
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK"))
 	private Product product;
 	
@@ -27,7 +27,7 @@ public class Basket {
 	@Formula("(select p.price*b.cnt from Basket b, Product p where p.id = b.product_id and p.id = product_id)")
 	private int priceTotal;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK") )
 	private User user;
 

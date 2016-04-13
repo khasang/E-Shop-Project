@@ -1,5 +1,8 @@
 package com.eshop.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.eshop.model.OrderStatus;
@@ -12,9 +15,13 @@ public class Status {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS_CODE")
 	private OrderStatus statusCode;
-	
+
 	@Column(name = "NAME")
 	private String name;
+
+	
+	@OneToMany(mappedBy="status", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<LogOrders> logOrders = new ArrayList<>();
 	
 	public OrderStatus getStatusCode() {
 		return statusCode;
@@ -31,4 +38,12 @@ public class Status {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<LogOrders> getLogOrders() {
+		return logOrders;
+	}
+
+	public void setLogOrders(List<LogOrders> logOrders) {
+		this.logOrders = logOrders;
+	}	
 }
