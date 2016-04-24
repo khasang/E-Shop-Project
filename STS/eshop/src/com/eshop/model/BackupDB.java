@@ -3,6 +3,9 @@ package com.eshop.model;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BackupDB {
 
 	public BackupDB() {

@@ -2,9 +2,7 @@ package com.eshop.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
-
 import com.eshop.model.OrderStatus;
 
 @Entity
