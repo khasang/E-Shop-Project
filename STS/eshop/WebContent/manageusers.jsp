@@ -22,7 +22,6 @@
  <td>${user.login}</td>
  <td>
 <form:form action="updateRole" modelAttribute="User"> 
-<!-- form:hidden path="login" value="${user.login}"/-->
 <input type="hidden" name="login" value="${user.login}">
 <security:csrfInput />
 <form:select id="role" path="role">

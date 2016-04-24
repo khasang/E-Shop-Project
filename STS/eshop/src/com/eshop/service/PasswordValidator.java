@@ -1,11 +1,12 @@
 package com.eshop.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
 import com.eshop.entity.User;
 
+@Component
 public class PasswordValidator implements Validator {
 
 	@Override

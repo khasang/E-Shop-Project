@@ -7,17 +7,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.eshop.entity.User;
+
+import com.eshop.entity.*;
 import com.eshop.model.*;
 import com.eshop.repository.*;
 import com.eshop.service.PasswordValidator;
 
 @Controller
 public class AppController {
-
 	@Autowired
 	ShrinkDataDB shrinkDataDB;
 	@Autowired
@@ -30,7 +31,9 @@ public class AppController {
 	UserRepository userRepository;
 	@Autowired
 	BasketRepository basketRepository;
-	
+	@Autowired
+	LogOrdersRepository logOrdersRepository;
+
 	@RequestMapping("login")
 	public String login() {
 		return "login";
@@ -57,7 +60,16 @@ public class AppController {
 		String login = principal.getName();
 		User user = userRepository.findByLogin(login);
 		modelandview.addObject("listBasket", basketRepository.findByUser(user));
+        modelandview.addObject("listOrders", new Orders());	    
 		return modelandview;
+	}
+	
+	@RequestMapping(value="deleteorder/{orderId}")
+	public String deleteOrder(@PathVariable("orderId") int orderId){
+	    Basket basket = new Basket();
+	    basket.setId(orderId);
+	    basketRepository.delete(basket);
+        return "redirect:/basket";
 	}
 	
 	@RequestMapping("adduser")
@@ -76,6 +88,19 @@ public class AppController {
 		return modelandview;
 	}
 
+	@RequestMapping("addOrderInLog")
+	public ModelAndView addOrderInLog(@ModelAttribute("Basket") Basket basket, BindingResult result) {
+		ModelAndView modelandview = new ModelAndView("E-Shop");
+		LogOrders logOrders = new LogOrders();
+		Status status = new Status();
+		status.setStatusCode(OrderStatus.PAID);		
+		logOrders.setStatus(status);
+		logOrders.setBasket(basket);
+	    logOrdersRepository.save(logOrders);
+		modelandview.addObject("result", "The order has been paid");
+		return modelandview;
+	}
+
 	@RequestMapping("/admin/manageusers")
 	public ModelAndView manageusers() {
 		ModelAndView modelandview = new ModelAndView("manageusers");
@@ -88,7 +113,6 @@ public class AppController {
 
 	@RequestMapping("/admin/updateRole")
 	public String updaterole(@ModelAttribute("User") User user) {
-		System.out.println("login =");
 		userRepository.setRole(user.getLogin(), user.getRole());
 		return "redirect:/admin/manageusers";
 	}

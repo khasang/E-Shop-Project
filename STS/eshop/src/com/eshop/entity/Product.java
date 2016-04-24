@@ -1,5 +1,8 @@
 package com.eshop.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,6 +26,9 @@ public class Product {
 
 	@Column(name = "CATEGORY_ID")
 	private int categoryId;
+	
+	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<Basket> basket = new ArrayList<>();
 
 	public int getId() {
 		return id;

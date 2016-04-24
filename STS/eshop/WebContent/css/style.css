@@ -1,8 +1,9 @@
-body {
+body, a {
 	background-color: #F5F5F5;
 	padding: 0px;
 	margin: 0px;
 	color: #045757;
+	text-decoration:none;
 }
 
 h1 {

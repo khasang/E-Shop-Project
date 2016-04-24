@@ -1,23 +1,32 @@
 package com.eshop.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
+import com.eshop.model.OrderStatus;
 
 @Entity
 @Table(name = "STATUS")
 public class Status {
+
 	@Id
-	@GeneratedValue
-	private int id;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "STATUS_CODE")
+	private OrderStatus statusCode;
 
 	@Column(name = "NAME")
 	private String name;
 
-	public int getId() {
-		return id;
+	
+	@OneToMany(mappedBy="status", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<LogOrders> logOrders = new ArrayList<>();
+	
+	public OrderStatus getStatusCode() {
+		return statusCode;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setStatusCode(OrderStatus statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	public String getName() {
@@ -27,4 +36,12 @@ public class Status {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<LogOrders> getLogOrders() {
+		return logOrders;
+	}
+
+	public void setLogOrders(List<LogOrders> logOrders) {
+		this.logOrders = logOrders;
+	}	
 }
