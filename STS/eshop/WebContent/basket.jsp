@@ -32,9 +32,12 @@ ${result}
 			<td>${basket.priceTotal}</td>		
 			<td><a href="deleteorder/${basket.id}">Delete</a></td>
 		</tr>
+		
 	</c:forEach>
+	<tr><td colspan = "3">&nbsp;</td><td>${orderSum}</td><td><a href="#">Make order</a></td></tr>
 </table>
 </form:form>
+
 </div>
 </div>
 

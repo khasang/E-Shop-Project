@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 @Configuration
@@ -26,4 +27,9 @@ public class RootConfig {
 				password = environment.getProperty("db.password");		
 		return new SimpleDriverDataSource(driver, url, username, password);
 	}
+	
+	 @Bean(name = "jdbcTemplate")
+     public JdbcTemplate jdbcTemplate() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalStateException {
+	        return new JdbcTemplate(getDataSource());
+    }
 }
