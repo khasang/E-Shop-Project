@@ -61,6 +61,7 @@ public class AppController {
 		User user = userRepository.findByLogin(login);
 		modelandview.addObject("listBasket", basketRepository.findByUser(user));
         modelandview.addObject("listOrders", new Orders());	    
+        modelandview.addObject("orderSum",basketRepository.getOrderSum(user));
 		return modelandview;
 	}
 	
