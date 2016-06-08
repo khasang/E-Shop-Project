@@ -2,6 +2,7 @@ package com.eshop.controller;
 
 import java.security.Principal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eshop.entity.*;
-import com.eshop.model.*;
-import com.eshop.repository.*;
+import com.eshop.entity.Basket;
+import com.eshop.entity.LogOrders;
+import com.eshop.entity.Status;
+import com.eshop.entity.User;
+import com.eshop.model.BackupDB;
+import com.eshop.model.OrderStatus;
+import com.eshop.model.Orders;
+import com.eshop.model.ShowTableDB;
+import com.eshop.model.ShrinkDataDB;
+import com.eshop.repository.BasketRepository;
+import com.eshop.repository.CategoryRepository;
+import com.eshop.repository.LogOrdersRepository;
+import com.eshop.repository.ProductRepository;
+import com.eshop.repository.UserRepository;
 import com.eshop.service.PasswordValidator;
 
 @Controller
@@ -33,6 +45,10 @@ public class AppController {
 	BasketRepository basketRepository;
 	@Autowired
 	LogOrdersRepository logOrdersRepository;
+	@Autowired
+	ProductRepository productRepository;
+	@Autowired
+	CategoryRepository categoryRepository;
 
 	@RequestMapping("login")
 	public String login() {
@@ -51,6 +67,13 @@ public class AppController {
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("result", "Welcome to our Eshop project!");
+		return modelandview;
+	}
+	
+	@RequestMapping("main")
+	public ModelAndView displayMainPage(){
+		ModelAndView modelandview = new ModelAndView("main");
+		modelandview.addObject("listCategories",categoryRepository.findAllByOrderByName());
 		return modelandview;
 	}
 
