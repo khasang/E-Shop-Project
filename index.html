@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="ru">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>The E-Shop</title>
+</head>
+<body>
+<!-- Одно модальное окно работает только для одного Лабутена для остальных нужно делать оттдельное окно -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="moreInformation">Больше информации</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-md-6"><img src="img/labuten.jpg"></div>
+                <div class="col-md-6">  <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        <th>Значение</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Модель</td>
+                        <td>Лабутены</td>
+                    </tr>
+                    <tr>
+                        <td>Цвет</td>
+                        <td>Бардовые</td>
+                    </tr>
+                    <tr>
+                        <td>Размер</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>Высота каблука</td>
+                        <td>35 см</td>
+                    </tr>
+                    <tr>
+                        <td>Высота платформы</td>
+                        <td>8см</td>
+                    </tr>
+                    </tbody>
+                </table></div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Registration Modal -->
+<div class="modal fade" id="registration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="registrationLabel">Регистрация</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Пароль</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Пароль еще раз</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Пароль еще раз">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Фотография</label>
+                        <input type="file" id="exampleInputFile">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Запомнить меня
+                        </label>
+                    </div>
+                    <div class="alert alert-success" role="alert">
+                        Фактом регистрации Вы подтверждаете свое согласие с <a href="#">Правилами</a> сайта.
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Entry Modal -->
+<div class="modal fade" id="enter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Вход</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Пароль</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Пароль">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Запомнить меня
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Навигационная панель-->
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">E-Shop</a>
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Главная</a></li>
+                <li><a href="#">Статьи</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Новости <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Лабутены</a></li>
+                        <li><a href="#">Валенки</a></li>
+                        <li><a href="#">Кеды</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Остальное барахло</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form role="search" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" placeholder="Найти" class="form-control">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Пользователь <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#registration">Регистрация</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#enter">Вход</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div style="height: 70px"></div>
+<!-- контейнер основной-->
+<div class="container-fluid">
+    <div class="row">
+        <!-- модальные окна для лабутен и регистрации-->
+        <div class="col-xs-6 col-md-3">
+            <a  href="#" class="thumbnail" data-toggle="modal" data-target="#myModal" >
+                <img src="img/labuten.jpg" alt="labuten">
+            </a>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="img/labuten.jpg" alt="labuten">
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="img/labuten.jpg" alt="labuten">
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="img/labuten.jpg" alt="labuten">
+            </a>
+        </div>
+            </div>
+        </div>
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
