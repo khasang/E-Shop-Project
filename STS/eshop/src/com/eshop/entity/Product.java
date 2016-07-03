@@ -8,6 +8,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
+	
+	public Product() {
+	}
 	@Id
 	@GeneratedValue
 	private int id;

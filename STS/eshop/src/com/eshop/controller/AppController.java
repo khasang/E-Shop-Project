@@ -22,6 +22,7 @@ import com.eshop.model.OrderStatus;
 import com.eshop.model.Orders;
 import com.eshop.model.ShowTableDB;
 import com.eshop.model.ShrinkDataDB;
+import com.eshop.model.cart.Cart;
 import com.eshop.repository.BasketRepository;
 import com.eshop.repository.CategoryRepository;
 import com.eshop.repository.LogOrdersRepository;
@@ -67,6 +68,7 @@ public class AppController {
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
 		modelandview.addObject("result", "Welcome to our Eshop project!");
+        modelandview.addObject("cart", new Cart());
 		return modelandview;
 	}
 	

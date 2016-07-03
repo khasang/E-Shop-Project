@@ -7,7 +7,11 @@
   <body> 
    <%@ include file="navbar.jsp"%>     
    <div class="container">
-   <%@ include file="listProducts.jsp"%> 
+   <c:forEach var="item" items="${listCart}">
+     <div class="row">
+       <div class="col-md4"></div>
+     </div>
+   </c:forEach> 
    <hr>
   <footer>
         <p>&copy; 2015-2016 Khasang</p>
