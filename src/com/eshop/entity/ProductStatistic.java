@@ -1,4 +1,4 @@
-package com.eshop.entity;
+/*package com.eshop.entity;
 
 
 import javax.persistence.*;
@@ -37,4 +37,4 @@ public class ProductStatistic {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-}
+}*/

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eshop.entity.Product;
-import com.eshop.entity.ProductStatistic;
+//import com.eshop.entity.ProductStatistic;
 import com.eshop.entity.User;
 import com.eshop.model.*;
 import com.eshop.repository.*;
@@ -38,7 +38,7 @@ public class AppController {
 	@Autowired
 	BasketRepository basketRepository;
 	@Autowired
-	ProductStatisticRepository productStatisticRepository;
+	//ProductStatisticRepository productStatisticRepository;
 	
 	@RequestMapping("login")
 	public String login() {
@@ -134,7 +134,7 @@ public class AppController {
 		modelandview.setViewName("shrink");
 		return modelandview;
 	}
-	
+	/*
 	@RequestMapping(value="product/{productId}")
 	public String add(@PathVariable("productId") int id){
 		Product product = new Product();
@@ -146,3 +146,4 @@ public class AppController {
 		//return modelandview;	
 	}
 }
+*/}
