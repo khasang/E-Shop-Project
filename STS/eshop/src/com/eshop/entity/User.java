@@ -31,6 +31,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ROLE")
 	private UserRoles role = UserRoles.ROLE_USER;
+	
+	@Column(name = "ENABLED")
+	private int enabled;
 
 	public User() {
 	}
@@ -93,6 +96,14 @@ public class User {
 
 	public List<UserRoles> getRolesValues() {
 		return Arrays.asList(UserRoles.values());
+	}
+	
+	public int getEnabled(){
+		return enabled;
+	}
+	
+	public void setEnabled(int enabled){
+		this.enabled = enabled;
 	}
 
 	public String toString() {

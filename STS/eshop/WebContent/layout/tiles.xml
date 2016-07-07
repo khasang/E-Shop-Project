@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition" template="/layout/layout.jsp">
+        <put-attribute name="title" value="E-Shop"></put-attribute>
+        <put-attribute name="header" value="/layout/header.jsp"></put-attribute>
+        <put-attribute name="footer" value="/layout/footer.jsp"></put-attribute>
+    </definition>
+
+    <definition name="main" extends="base.definition">
+        <put-attribute name="title" value="Главная страница"></put-attribute>
+        <put-attribute name="body" value="main.jsp"/>
+    </definition>
+</tiles-definitions>
