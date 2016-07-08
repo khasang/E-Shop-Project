@@ -1,7 +1,5 @@
 package com.eshop.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -18,11 +16,11 @@ public class Wish {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_FK"))
+	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "PRODUCT_WISH_FK"))
 	private Product product;
 
 	@ManyToOne
-	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_FK") )
+	@JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "USER_WISH_FK") )
 	private User user;
 	
 	public int getId() {
