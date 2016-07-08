@@ -5,12 +5,18 @@
    <%@ include file="head.jsp"%>    
   </head>
   <body> 
-   <%@ include file="navbar.jsp"%>     
+   <%@ include file="navbar.jsp"%>
+       
    <div class="container">
-   <c:forEach var="item" items="${listCart}">
-     <div class="row">
-       <div class="col-md4"></div>
-     </div>
+   
+     <c:forEach var="item" items="${listCart}">
+       <div class="row show-grid">
+         <div class="col-md-1">${item.product.name}</div>
+         <div class="col-md-1">${item.product.description}</div>
+         <div class="col-md-1">${item.product.price}</div>
+         <div class="col-md-1">${item.quantity}</div>
+         <div class="col-md-1">${item.amount}</div>
+       </div>
    </c:forEach> 
    <hr>
   <footer>

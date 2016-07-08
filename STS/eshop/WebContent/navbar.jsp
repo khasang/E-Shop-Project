@@ -1,11 +1,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">ElectroShop</a>
+			<a class="navbar-brand" href="/eshop">ElectroShop</a>
 		</div>
 		<div id="navbar" class="navbar-collapse">
 			<p class="navbar-text">
-				<a href="#" class="navbar-link">View cart</a>
+				<a href="${eshopurl}/viewcart" class="navbar-link">View cart</a>
 			</p>
 			<s:url var="authUrl" value='j_spring_security_check' />
 			<c:if test="${not empty param.login_error}">

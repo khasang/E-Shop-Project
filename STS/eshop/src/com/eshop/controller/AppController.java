@@ -22,9 +22,7 @@ import com.eshop.model.OrderStatus;
 import com.eshop.model.Orders;
 import com.eshop.model.ShowTableDB;
 import com.eshop.model.ShrinkDataDB;
-import com.eshop.model.cart.Cart;
 import com.eshop.repository.BasketRepository;
-import com.eshop.repository.CategoryRepository;
 import com.eshop.repository.LogOrdersRepository;
 import com.eshop.repository.ProductRepository;
 import com.eshop.repository.UserRepository;
@@ -48,8 +46,6 @@ public class AppController {
 	LogOrdersRepository logOrdersRepository;
 	@Autowired
 	ProductRepository productRepository;
-	@Autowired
-	CategoryRepository categoryRepository;
 
 	@RequestMapping("login")
 	public String login() {
@@ -67,18 +63,10 @@ public class AppController {
 	@RequestMapping("/")
 	public ModelAndView inputForm() {
 		ModelAndView modelandview = new ModelAndView("E-Shop");
-		modelandview.addObject("result", "Welcome to our Eshop project!");
-        modelandview.addObject("cart", new Cart());
+		modelandview.addObject("result", "Welcome to our Eshop project!");        
 		return modelandview;
 	}
 	
-	@RequestMapping("main")
-	public ModelAndView displayMainPage(){
-		ModelAndView modelandview = new ModelAndView("main");
-		modelandview.addObject("listCategories",categoryRepository.findAllByOrderByName());
-		return modelandview;
-	}
-
 	@RequestMapping("basket")
 	public ModelAndView viewBasket(Principal principal) {
 		ModelAndView modelandview = new ModelAndView("basket");

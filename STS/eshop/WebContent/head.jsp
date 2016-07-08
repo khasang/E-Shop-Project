@@ -13,3 +13,4 @@
 <!-- Custom styles for this template -->
 <link href="resources/jumbotron.css" rel="stylesheet">   
 <script src="resources/js/holder.js"></script> 
+<c:set var="eshopurl" value="${pageContext.request.contextPath}"/>
