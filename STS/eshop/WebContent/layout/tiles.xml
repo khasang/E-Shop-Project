@@ -11,6 +11,16 @@
 
     <definition name="main" extends="base.definition">
         <put-attribute name="title" value="Главная страница"></put-attribute>
-        <put-attribute name="body" value="main.jsp"/>
+        <put-attribute name="body" value="/tiles-views/main.jsp"/>
+    </definition>
+    
+    <definition name="registration" template="/tiles-views/registration.jsp">
+    	<put-attribute name="title" value="Регистрация"></put-attribute>
+    </definition>
+    
+    <definition name="basket" extends="base.definition">
+        <put-attribute name="title" value="Корзина"></put-attribute>
+        <put-attribute name="body" value="/tiles-views/basket.jsp"/>
+        <put-attribute name="leftMenu" value="/tiles-views/leftMenu.jsp"/>
     </definition>
 </tiles-definitions>

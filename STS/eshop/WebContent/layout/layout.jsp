@@ -12,7 +12,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="The Electronic shop project">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">   
+    <link rel="icon" href="favicon.ico">
+    <LINK rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css" title="style" />   
     <title>The Electronic Shop</title>
     <!-- Bootstrap core CSS -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -25,5 +26,12 @@
   	<tiles:insertAttribute name="header" />
     <tiles:insertAttribute name="body" />
     <tiles:insertAttribute name="footer" />
+    
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--  script src="resources/js/bootstrap.min.js"></script-->  
   </body>
 </html>
