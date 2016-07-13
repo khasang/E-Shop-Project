@@ -5,7 +5,8 @@
 		</div>
 		<div id="navbar" class="navbar-collapse">
 			<p class="navbar-text">
-				<a href="${eshopurl}/viewcart" class="navbar-link">View cart</a>
+				<a href="${eshopurl}/cart" class="navbar-link">View cart</a>
+				<span class="badge">${totalItemsInCart}</span>
 			</p>
 			<s:url var="authUrl" value='j_spring_security_check' />
 			<c:if test="${not empty param.login_error}">

@@ -10,7 +10,7 @@ public class Cart {
 
 	public Cart() {
 	}
-	
+
 	public List<Item> getItems() {
 		return items;
 	}
@@ -19,6 +19,8 @@ public class Cart {
 		Item item = findItemByProductId(product.getId());
 		if (item == null) {
 			items.add(new Item(product, 1));
+		} else {
+			updateItem(product, item.getQuantity() + 1);
 		}
 	}
 

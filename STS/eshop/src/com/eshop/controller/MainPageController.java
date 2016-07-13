@@ -27,23 +27,39 @@ public class MainPageController {
 	public ModelAndView displayMainPage(HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("main");
 		modelandview.addObject("listCategories", categoryRepository.findAllByOrderByName());
-		if (session.getAttribute("cart") == null) {
+		int totalItemsInCart = 0;
+		Cart cart = (Cart)session.getAttribute("cart");
+		if (cart == null) {
 			modelandview.addObject("cart", new Cart());
 		}
+		else{
+			totalItemsInCart = cart.getQuantityTotal();  
+		}
+		modelandview.addObject("totalItemsInCart",totalItemsInCart);
 		return modelandview;
 	}
 
-	@RequestMapping(value = "addtocart/{productId}")
+	@RequestMapping(value = "/cart/add/{productId}")
 	public String addToCart(@PathVariable("productId") int productId, @ModelAttribute("cart") Cart cart) {
 		Product product = productRepository.findOne(productId);
 		cart.addtem(product);
 		return "redirect:/main";
 	}
+	
+	@RequestMapping(value = "/cart/delete/{productId}")
+	public String deletefromCart(@PathVariable("productId") int productId, @ModelAttribute("cart") Cart cart){
+		Product product = productRepository.findOne(productId);
+		cart.deleteItem(product);
+		return "redirect:/cart";
+		
+	}
 
-	@RequestMapping("viewcart")
+	@RequestMapping("cart")
 	public ModelAndView viewCart(@ModelAttribute("cart") Cart cart) {
-		ModelAndView modelandview = new ModelAndView("viewñart");
+		ModelAndView modelandview = new ModelAndView("ñart");
 		modelandview.addObject("listCart", cart.getItems());
+		modelandview.addObject("totalItemsInCart",cart.getQuantityTotal());
+		modelandview.addObject("totalAmountInCart", cart.getAmountTotal());
 		return modelandview;
 	}
 }

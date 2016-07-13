@@ -11,7 +11,8 @@
 					<p>${product.description}</p>
 					<p>Price:${product.price}</p>
 					<p>
-						<a class="btn btn-default" href="${eshopurl}/addtocart/${product.id}" role="button">Add to cart&raquo;</a>
+					
+  			        <a class="btn btn-default" href="${eshopurl}/cart/add/${product.id}" role="button">Add to cart&raquo;</a>
 					</p>
 				</div>
 			</div>

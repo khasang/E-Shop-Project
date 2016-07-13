@@ -10,12 +10,9 @@
    <%@ include file="listProducts.jsp"%> 
    <hr>
   <footer>
-        <p>&copy; 2015-2016 Khasang</p>
-      </footer>
-    </div> <!-- /container -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!--  script src="resources/js/bootstrap.min.js"></script-->  
-  </body>
+    <p>&copy; 2015-2016 Khasang</p>
+  </footer>
+ </div> <!-- /container -->
+ <%@ include file="scripts.jsp"%>    
+ </body>
 </html>

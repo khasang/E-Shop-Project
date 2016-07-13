@@ -4,6 +4,11 @@ body {
   padding-bottom: 20px;
 }
 
-.well-sm{
+.table, .well-sm{
   margin-top: 20px;
+}
+
+
+.table-hover > tbody > tr:hover {
+  background-color: #dff0d8;
 }
