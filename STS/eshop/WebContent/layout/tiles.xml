@@ -4,24 +4,24 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="base.definition" template="/layout/layout.jsp">
-        <put-attribute name="title" value="E-Shop"></put-attribute>
-        <put-attribute name="navbar" value="/layout/navbar.jsp"></put-attribute>
-        <put-attribute name="footer" value="/layout/footer.jsp"></put-attribute>
-        <put-attribute name="scripts" value="/tiles-views/scripts.jsp"></put-attribute>
+        <put-attribute name="title" value="E-Shop"/>
+        <put-attribute name="navbar" value="/layout/navbar.jsp"/>
+        <put-attribute name="footer" value="/layout/footer.jsp"/>
+        <put-attribute name="scripts" value="/tiles-views/scripts.jsp"/>
     </definition>
 
     <definition name="main" extends="base.definition">
-        <put-attribute name="title" value="Главная страница"></put-attribute>
-        <put-attribute name="body" value="/tiles-views/main.jsp"/>
+        <put-attribute name="title" value="Главная страница"/>
+        <put-attribute name="body" value="/tiles-views/listProducts.jsp"/>
     </definition>
     
     <definition name="cart" extends="base.definition">
-        <put-attribute name="title" value="Корзина"></put-attribute>
+        <put-attribute name="title" value="Корзина"/>
         <put-attribute name="body" value="/tiles-views/cart.jsp"/>
     </definition>
     
     <definition name="login" extends="base.definition">
-        <put-attribute name="title" value="Вход"></put-attribute>
+        <put-attribute name="title" value="Вход"/>
         <put-attribute name="body" value="/tiles-views/login.jsp"/>
     </definition>
 </tiles-definitions>

@@ -221,5 +221,10 @@
 		  <artifactId>junit</artifactId>
 		  <version>4.12</version>
 	  </dependency>
+	  <dependency>
+		  <groupId>jstl</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+	  </dependency>
   </dependencies>
 </project>
