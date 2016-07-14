@@ -1,4 +1,6 @@
-<%@ c:taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="container">
 <c:forEach var="category" items="${listCategories}">
 	<div class="well well-sm">${category.name}</div>
 	<div class="row">
@@ -12,11 +14,11 @@
 					<p>${product.description}</p>
 					<p>Price:${product.price}</p>
 					<p>
-					
-  			        <a class="btn btn-default" href="${eshopurl}/cart/add/${product.id}" role="button">Add to cart&raquo;</a>
+						<a class="btn btn-default" href="${eshopurl}/cart/add/${product.id}" role="button">Add to cart&raquo;</a>
 					</p>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 </c:forEach>
+	</div>
