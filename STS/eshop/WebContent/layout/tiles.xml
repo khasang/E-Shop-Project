@@ -5,6 +5,7 @@
 <tiles-definitions>
     <definition name="base.definition" template="/layout/layout.jsp">
         <put-attribute name="title" value="E-Shop"/>
+        <put-attribute name="head" value="/layout/head.jsp"/>
         <put-attribute name="navbar" value="/layout/navbar.jsp"/>
         <put-attribute name="footer" value="/layout/footer.jsp"/>
         <put-attribute name="scripts" value="/tiles-views/scripts.jsp"/>
