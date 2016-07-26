@@ -8,8 +8,16 @@
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>
+	<c:url var="home" value="/" scope="request" />   
 	<div class="container">
-		<table class="table table-hover">
+		<div id="error_message" class="alert alert-danger alert-dismissable fade in hidden" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">	  
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong id="error">&nbsp;</strong>
+    </div>
+    
+	<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -28,16 +36,17 @@
 						<td>${item.product.price}</td>
 						<td class="col-lg-2">
 							<div class="input-group">
+							    <input type="hidden" id="productId${status.count}" value="${item.product.id}">
 								<span class="input-group-btn">
-								<button type="button" id="btnplus${status.step}" class="btn btn-default">+</button>
-								</span> 
-							     <input type="text" id="input${status.step}" class="form-control" value="${item.quantity}">							 
-								<span class="input-group-btn">
-								<button type="button" id="btnminus${status.step}" class="btn btn-default">-</button>								
+								  <button type="button" id="btnplus${status.count}" class="btn btn-default">+</button>
+								</span> 								  
+							    <input type="text" id="quantity${status.count}" class="form-control" value="${item.quantity}">							 
+							 	<span class="input-group-btn">
+							      <button type="button" id="btnminus${status.count}" class="btn btn-default">-</button>								
 								</span>
 							</div>
 						</td>
-						<td class="col-lg-1">${item.amount}</td>
+						<td class="col-lg-1" id="amount${item.product.id}">${item.amount}</td>
 						<td> <a class="btn btn-default" href="${eshopurl}/cart/delete/${item.product.id}" role="button">Delete</a></td>
 
 					</tr>
@@ -46,8 +55,8 @@
 			<tfoot>
 				<tr>
 					<th colspan="3" class="text-right">Total</th>
-					<th>${totalItemsInCart}</th>
-					<th>${totalAmountInCart}</th>
+					<th id="quantityTotal">${totalItemsInCart}</th>
+					<th id="amountTotal">${totalAmountInCart}</th>
 					<th>&nbsp;</th>
 				</tr>
 			</tfoot>

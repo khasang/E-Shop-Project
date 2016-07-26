@@ -2,13 +2,15 @@
 body {
   padding-top: 50px;
   padding-bottom: 20px;
-}
-
-.table, .well-sm{
   margin-top: 20px;
 }
 
+.alert{
+ margin-left: 10px;
+ margin-right: 10px;  
+}
 
 .table-hover > tbody > tr:hover {
   background-color: #dff0d8;
 }
+

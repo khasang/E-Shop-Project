@@ -1,8 +1,18 @@
 package com.eshop.model.cart;
 
+import java.io.Serializable;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
 import com.eshop.entity.Product;
 
-public class Item {
+@Component
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class Item implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Product product;
 	private int quantity;
 
@@ -12,7 +22,7 @@ public class Item {
 	}
 
 	public Product getProduct() {
-		return product;
+		return this.product;
 	}
 
 	public void setProduct(Product product) {
@@ -20,7 +30,7 @@ public class Item {
 	}
 
 	public int getQuantity() {
-		return quantity;
+		return this.quantity;
 	}
 
 	public void setQuantity(int quantity) {
@@ -28,11 +38,11 @@ public class Item {
 	}
 	
 	public int getPrice(){
-		return product.getPrice();
+		return this.product.getPrice();
 	}
 	
 	public int getAmount(){
-		return product.getPrice()*quantity;
+		return this.product.getPrice()*this.quantity;
 	}
 
 }

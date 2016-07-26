@@ -1,5 +1,6 @@
 package com.eshop.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCT")
-public class Product {
-	
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	public Product() {
 	}
 	@Id

@@ -24,28 +24,25 @@ import com.eshop.model.ShowTableDB;
 import com.eshop.model.ShrinkDataDB;
 import com.eshop.repository.BasketRepository;
 import com.eshop.repository.LogOrdersRepository;
-import com.eshop.repository.ProductRepository;
 import com.eshop.repository.UserRepository;
 import com.eshop.service.PasswordValidator;
 
 @Controller
 public class AppController {
 	@Autowired
-	ShrinkDataDB shrinkDataDB;
+	private ShrinkDataDB shrinkDataDB;
 	@Autowired
-	ShowTableDB show;
+	private ShowTableDB show;
 	@Autowired
-	BackupDB backup;
+	private BackupDB backup;
 	@Autowired
-	PasswordValidator passwordValidator;
+	private PasswordValidator passwordValidator;
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 	@Autowired
-	BasketRepository basketRepository;
+	private BasketRepository basketRepository;
 	@Autowired
-	LogOrdersRepository logOrdersRepository;
-	@Autowired
-	ProductRepository productRepository;
+	private LogOrdersRepository logOrdersRepository;
 
 	@RequestMapping("login")
 	public String login() {
