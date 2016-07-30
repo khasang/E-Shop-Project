@@ -1,5 +1,6 @@
 package com.eshop.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCT")
-public class Product {
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	public Product() {
+	}
 	@Id
 	@GeneratedValue
 	private int id;
@@ -24,11 +30,12 @@ public class Product {
 	@Column(name = "IMAGEURL")
 	private String imageURL;
 
-	@Column(name = "CATEGORY_ID")
-	private int categoryId;
-	
 	@OneToMany(mappedBy="product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Basket> basket = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name="CATEGORY_ID", foreignKey = @ForeignKey(name = "CATEGORY_FK"))  
+	private Category category;
 
 	public int getId() {
 		return id;
@@ -70,11 +77,19 @@ public class Product {
 		this.imageURL = imageURL;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public List<Basket> getBasket() {
+		return basket;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setBasket(List<Basket> basket) {
+		this.basket = basket;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }
