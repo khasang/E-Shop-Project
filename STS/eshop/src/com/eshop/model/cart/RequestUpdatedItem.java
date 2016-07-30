@@ -1,6 +1,6 @@
 package com.eshop.model.cart;
 
-public class UpdatedItem {
+public class RequestUpdatedItem {
   private int productId;
   private int newQuantity;
   

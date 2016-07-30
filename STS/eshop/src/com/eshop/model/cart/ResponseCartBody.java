@@ -3,7 +3,7 @@ package com.eshop.model.cart;
 import com.eshop.jsonview.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 
-public class CartResponseBody {
+public class ResponseCartBody {
 	
 	@JsonView(Views.Public.class)
 	int productId;
