@@ -1,6 +1,7 @@
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <c:set var="eshopurl" value="${pageContext.request.contextPath}"/>
-<script src="resources/js/jquery-2.2.4.min.js"></script>
+<script src="../resources/js/jquery-2.2.4.min.js"></script>
 <script>
  $( document ).ready(function() {
 	 $('[id^=btnminus]').on('click', function(){
