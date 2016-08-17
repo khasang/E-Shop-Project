@@ -23,3 +23,5 @@ hs_err_pid*
 /build/
 >>>>>>> origin/dev-AGalochkin-SpringSecurity
 /MapPointer/
+STS/eshop/.idea/
+STS/eshop/eshop.iml

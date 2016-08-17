@@ -1,5 +1,7 @@
 package com.eshop.entity;
 
+import org.hibernate.annotations.Type;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -22,7 +24,8 @@ public class LogOrders {
     @JoinColumn(name="basket_id", foreignKey = @ForeignKey(name = "BASKET_FK"))  	
 	private Basket basket;
 
-	@Column(name = "DATE", columnDefinition = "DATETIME DEFAULT NOW()", insertable=false)
+	@Column(name = "DATE", columnDefinition = "DATETIME", insertable=true)
+	@Type(type="timestamp")
 	private Timestamp timestamp;
 
 	@ManyToOne

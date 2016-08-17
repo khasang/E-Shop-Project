@@ -1,5 +1,3 @@
-package com.eshop.test;
-
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import com.eshop.entity.Product;
@@ -8,9 +6,9 @@ import com.eshop.model.cart.Item;
 import org.junit.Before;
 
 public class CartTest {
-	Cart cart = new Cart();
-	Product product = new Product();
-	final int TEST_ID = 1, TEST_PRICE = 1, TEST_QUANTITY = 1;
+	private Cart cart = new Cart();
+	private Product product = new Product();
+	private final int TEST_ID = 1, TEST_PRICE = 1, TEST_QUANTITY = 1;
 
 	@Before
 	public void setUp() throws Exception {

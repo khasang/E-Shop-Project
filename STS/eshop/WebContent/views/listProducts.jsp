@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+
 <c:forEach var="category" items="${listCategories}">
 	<div class="well well-sm">${category.name}</div>
 	<div class="row">
@@ -11,8 +14,8 @@
 					<p>${product.description}</p>
 					<p>Price:${product.price}</p>
 					<p>
-					
-  			        <a class="btn btn-default" href="${eshopurl}/cart/add/${product.id}" role="button">Add to cart&raquo;</a>
+						<s:url value="/cart/add/${product.id}" var="addUrl"/>
+  			        	<a class="btn btn-default" href="${addUrl}" role="button">Add to cart&raquo;</a>
 					</p>
 				</div>
 			</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition" template="/layout/layout.jsp">
+        <put-attribute name="title" value="EShop"/>
+        <put-attribute name="head" value="/views/head.jsp"/>
+        <put-attribute name="navbar" value="/views/navbar.jsp"/>
+        <put-attribute name="footer" value="/views/footer.jsp"/>
+        <put-attribute name="scripts" value="/views/scripts.jsp"/>
+    </definition>
+
+    <definition name="main" extends="base.definition">
+        <put-attribute name="title" value="Main Page"/>
+        <put-attribute name="body" value="/views/listProducts.jsp"/>
+    </definition>
+
+    <definition name="cart" extends="base.definition">
+        <put-attribute name="title" value="Cart"/>
+        <put-attribute name="body" value="/views/cart.jsp"/>
+    </definition>
+</tiles-definitions>

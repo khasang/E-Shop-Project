@@ -48,7 +48,7 @@ public class MainPageController {
 
 	@RequestMapping("cart")
 	public ModelAndView viewCart() {
-		ModelAndView modelandview = new ModelAndView("ñart");
+		ModelAndView modelandview = new ModelAndView("cart");
 		modelandview.addObject("listCart", cart.getItems());
 		modelandview.addObject("totalItemsInCart",cart.getQuantityTotal());
 		modelandview.addObject("totalAmountInCart", cart.getAmountTotal());

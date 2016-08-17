@@ -1,11 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/eshop">ElectroShop</a>
+			<a class="navbar-brand" href="<s:url value="/"/>">ElectroShop</a>
 		</div>
 		<div id="navbar" class="navbar-collapse">
 			<p class="navbar-text">
-				<a href="${eshopurl}/cart" class="navbar-link">View cart</a>
+				<s:url value="/cart" var="cartUrl"/>
+				<a href="${cartUrl}" class="navbar-link">View cart</a>
 				<span class="badge">${totalItemsInCart}</span>
 			</p>
 			<s:url var="authUrl" value='j_spring_security_check' />
