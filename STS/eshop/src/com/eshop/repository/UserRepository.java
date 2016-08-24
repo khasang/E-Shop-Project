@@ -16,4 +16,6 @@ public interface UserRepository extends CrudRepository<User, String> {
 	int setRole(@Param("login") String login, @Param("role") UserRoles role);
 	
 	User findByLogin(String login);
+	
+	User findByEmail(String email);
 }

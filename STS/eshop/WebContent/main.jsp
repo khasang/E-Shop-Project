@@ -13,6 +13,9 @@
     <p>&copy; 2015-2016 Khasang</p>
   </footer>
  </div> <!-- /container -->
+ <%@ include file="loginpage.jsp"%> 
+ <%@ include file="register.jsp"%>   
+
  <%@ include file="scripts.jsp"%>    
  </body>
 </html>

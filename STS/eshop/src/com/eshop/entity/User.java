@@ -3,9 +3,15 @@ package com.eshop.entity;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.model.UserRoles;
+import com.eshop.validation.PasswordMatches;
+import com.eshop.validation.ValidEmail;
 
+@PasswordMatches
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -13,18 +19,29 @@ public class User {
 	@GeneratedValue
 	private int id;
 
-	@Column(name = "NAME")
+	@NotNull
+    @NotEmpty		
+	@Column(name = "NAME")	   
 	private String name;
 
+	@ValidEmail
+    @NotNull
+    @NotEmpty	
 	@Column(name = "EMAIL")
 	private String email;
 
+    @NotNull
+    @NotEmpty	
 	@Column(name = "LOGIN", unique = true)
 	private String login;
 
+    @NotNull
+    @NotEmpty
 	@Column(name = "PASSWORD")
 	private String password;
 
+    @NotNull
+    @NotEmpty
 	@Transient
 	private String confirmPassword;
 

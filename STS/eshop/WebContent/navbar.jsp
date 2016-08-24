@@ -12,25 +12,18 @@
 			<c:if test="${not empty param.login_error}">
 				<font color="red">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</font>
 			</c:if>
-			<form class="navbar-form navbar-right" action="${authUrl}"
-				method="post">
-				<div class="form-group">
-					<input type="text" name="login" placeholder="Login"
-						class="form-control">
-				</div>
-				<div class="form-group">
-					<input type="password" name="password" placeholder="Password"
-						class="form-control">
-				</div>
-				<button type="submit" class="btn btn-success">Sign in</button>
-				<div class="form-group">
-					<div class="navbar-collapse navbar-right">
-						<a href="registration" class="navbar-link">Registration</a>
-					</div>
-				</div>
-				<security:csrfInput />
-			</form>
-		</div>
+			 <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login&nbsp;|&nbsp;Register <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#registration">Register</a></li>
+                      
+                    </ul>
+                </li>
+            </ul>      
+			</div>
 		<!--/.navbar-collapse -->
 	</div>
 </nav>

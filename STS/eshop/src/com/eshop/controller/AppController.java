@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +24,6 @@ import com.eshop.model.ShrinkDataDB;
 import com.eshop.repository.BasketRepository;
 import com.eshop.repository.LogOrdersRepository;
 import com.eshop.repository.UserRepository;
-import com.eshop.service.PasswordValidator;
 
 @Controller
 public class AppController {
@@ -35,8 +33,6 @@ public class AppController {
 	private ShowTableDB show;
 	@Autowired
 	private BackupDB backup;
-	@Autowired
-	private PasswordValidator passwordValidator;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -83,21 +79,6 @@ public class AppController {
         return "redirect:/basket";
 	}
 	
-	@RequestMapping("adduser")
-	public ModelAndView registerUser(@ModelAttribute("User") User newUser, BindingResult result) {
-		ModelAndView modelandview = new ModelAndView("E-Shop");
-		passwordValidator.validate(newUser, result);
-		if (!result.hasErrors()) {
-			try {
-				userRepository.save(newUser);
-				modelandview.addObject("result", "User " + newUser.getLogin() + " successfully added");
-			} catch (DataIntegrityViolationException e) {
-				result.reject("user.exists", "User already exists");
-			}
-		}
-		modelandview.setViewName("registration");
-		return modelandview;
-	}
 
 	@RequestMapping("addOrderInLog")
 	public ModelAndView addOrderInLog(@ModelAttribute("Basket") Basket basket, BindingResult result) {

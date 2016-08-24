@@ -6,6 +6,16 @@
 <script src="resources/js/holder.js"></script> 
 <script>
  $( document ).ready(function() {
+    var pageURL = $(location).attr("pathname");
+    
+    if(pageURL.indexOf('register') > -1) {  	   	
+    	$('#registration').modal();
+    }
+    
+    if(pageURL.indexOf('loginpage') > -1) {  	   	
+    	$('#login').modal();
+    }
+    
 	 $('[id^=btnminus]').click(function(){
 	        val = $(this).parent().siblings('[id^=quantity]').val() - 1;
 	        resultVal = (val > 0) ? val : 1; 
@@ -26,8 +36,7 @@
 	    productId = $(this).siblings('[id^=productId]').val();
 	    newQuantity = $(this).val();
 	    updateCart(productId, newQuantity);
-	})
-	
+	})		
  });
   
  function updateCart(productId, newQuantity){
